@@ -1,0 +1,1 @@
+-- Seed data (default categories, challenge templates, demo users) lands in Phase 2.

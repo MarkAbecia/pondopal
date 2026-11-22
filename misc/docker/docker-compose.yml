@@ -1,0 +1,25 @@
+# Backend + Redis. Supabase runs separately via `supabase start` (see misc/scripts/dev.sh).
+name: pondopal
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build: ../../backend
+    env_file: ../../backend/.env
+    environment:
+      # Inside the container, reach host services (Supabase) via host.docker.internal
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@host.docker.internal:54322/postgres
+      REDIS_URL: redis://redis:6379/0
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    ports: ["8000:8000"]
+    depends_on:
+      redis:
+        condition: service_healthy
+    profiles: ["full"]
