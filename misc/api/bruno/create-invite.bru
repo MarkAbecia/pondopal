@@ -1,0 +1,27 @@
+meta {
+  name: Create invite
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/v1/spaces/{{spaceId}}/invites
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "role": "member",
+    "expires_in_hours": 168,
+    "max_uses": 1
+  }
+}
+
+script:post-response {
+  if (res.status === 201) bru.setEnvVar("inviteCode", res.body.code);
+}

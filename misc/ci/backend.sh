@@ -6,4 +6,8 @@ uv sync --frozen
 uv run ruff check .
 uv run ruff format --check .
 uv run mypy app tests
-uv run pytest
+# integration tests run in database.sh, where Supabase is up
+uv run pytest --cov=app.domain --cov-fail-under=90
+# the committed OpenAPI spec must match the code
+uv run python -m app.export_openapi
+git diff --exit-code -- ../misc/api/openapi.json

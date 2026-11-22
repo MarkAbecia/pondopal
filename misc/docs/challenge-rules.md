@@ -17,7 +17,10 @@ All amounts are integer centavos. Dates use `Asia/Manila`. The source of truth i
 - `remaining = target − contributed`
 - `periods_left` is the number of periods from today to the deadline at the chosen frequency. For semi-monthly, the periods fall on the 15th and the last day of each month.
 - The amount per period is `ceil(remaining / periods_left)`.
-- The status is `done` when `remaining ≤ 0`. It is `on_track` when the projected finish date at the current pace is on or before the deadline, and `behind` otherwise.
+- The status is `done` when `remaining ≤ 0`. Otherwise it is `on_track` when the amount saved so far is at least the straight-line share of the target for the time elapsed (`target × days_elapsed / total_days`), and `behind` if not. This means a brand-new goal starts out on track.
+- The projected finish date is `today + ceil(remaining × days_elapsed / contributed)`. It is `null` until there's at least one contribution and one day of history.
+- When no due date is left (the deadline has passed, or there's no payday before it), the whole remainder is due now.
+- Streaks stay alive until the current day or week is over. No-spend days only count completed days, never today.
 
 **Settle-up (v2).** Compute each member's net balance, then repeatedly match the largest debtor with the largest creditor.
 

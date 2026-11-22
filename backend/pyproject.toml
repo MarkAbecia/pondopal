@@ -4,8 +4,13 @@ version = "0.1.0"
 description = "PondoPal API: business logic, jobs and push notifications"
 requires-python = ">=3.12"
 dependencies = [
+    "asyncpg>=0.32.0",
     "fastapi>=0.165.0",
     "pydantic-settings>=2.16.3",
+    "pyjwt[crypto]>=2.15.1",
+    "redis>=8.1.0",
+    "sentry-sdk>=2.75.0",
+    "sqlalchemy[asyncio]>=2.1.9",
     "uvicorn[standard]>=0.54.0",
 ]
 
@@ -15,6 +20,7 @@ dev = [
     "mypy>=2.4.1",
     "pytest>=9.2.0",
     "pytest-asyncio>=1.5.0",
+    "pytest-cov>=7.1.0",
     "ruff>=0.17.6",
 ]
 
@@ -29,7 +35,7 @@ target-version = "py312"
 select = ["E", "F", "W", "I", "B", "UP", "S", "ASYNC", "RUF"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]
+"tests/**" = ["S101", "S105", "S106"]
 
 [tool.mypy]
 python_version = "3.12"
@@ -39,4 +45,6 @@ plugins = ["pydantic.mypy"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+addopts = "-m 'not integration'"
+markers = ["integration: needs a running local Supabase (run by misc/ci/database.sh)"]
 testpaths = ["tests"]
