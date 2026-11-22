@@ -6,7 +6,4 @@ SUPABASE="npx --yes supabase@3.2.0"
 $SUPABASE start
 trap '$SUPABASE stop --no-backup' EXIT
 $SUPABASE db lint --level warning --fail-on error
-# shortcut: skips pgTAP until Phase 2 adds tests under database/policies/
-if compgen -G "policies/*.sql" > /dev/null; then
-  $SUPABASE test db policies
-fi
+$SUPABASE test db policies

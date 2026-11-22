@@ -2,5 +2,6 @@
 # Regenerate frontend DB types from the local Supabase schema.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+mkdir -p ../frontend/src/types
 npx --yes supabase@3.2.0 gen types typescript --local > ../frontend/src/types/database.ts
 echo "Wrote frontend/src/types/database.ts"
