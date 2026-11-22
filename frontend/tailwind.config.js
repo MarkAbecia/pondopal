@@ -4,7 +4,8 @@ const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
-  darkMode: 'media',
+  // Dark colors come from CSS variables (src/lib/theme.ts), not dark: classes. 'media' crashes NativeWind on web.
+  darkMode: 'class',
   theme: {
     extend: {
       // Semantic colors that follow the system light/dark setting (src/global.css)

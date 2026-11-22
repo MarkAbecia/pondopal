@@ -27,7 +27,8 @@ const config: ExpoConfig = {
     predictiveBackGestureEnabled: false,
   },
   web: {
-    output: 'server',
+    // Phone-first app with no API routes: plain SPA. 'server' rendered every route in Node and hung the dev server.
+    output: 'single',
     favicon: './assets/images/favicon.png',
   },
   plugins: [
