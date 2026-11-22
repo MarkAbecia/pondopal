@@ -1,14 +1,23 @@
 /** @type {import('tailwindcss').Config} */
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
+  darkMode: 'media',
   theme: {
     extend: {
-      // shortcut: brand palette only; full light/dark tokens land in Phase 6
+      // Semantic colors that follow the system light/dark setting (src/global.css)
       colors: {
-        brand: { DEFAULT: '#0F9D58', dark: '#0B7A44', light: '#E6F6EE' },
-        income: '#0F9D58',
-        expense: '#D93025',
+        canvas: token('canvas'),
+        card: token('card'),
+        fg: { DEFAULT: token('fg'), 2: token('fg-2') },
+        muted: token('muted'),
+        line: { DEFAULT: token('line'), soft: token('line-soft') },
+        brand: { DEFAULT: token('brand'), light: token('brand-soft'), dark: token('brand-ink') },
+        income: token('income'),
+        expense: token('expense'),
+        'danger-soft': token('danger-soft'),
       },
     },
   },

@@ -7,6 +7,7 @@ import { usePushNotifications } from '@/features/notifications/push';
 import { useActiveSpace } from '@/features/spaces/api';
 import { SpaceSwitcher } from '@/features/spaces/SpaceSwitcher';
 import { useSpaceRealtime } from '@/features/spaces/useSpaceRealtime';
+import { usePalette } from '@/lib/theme';
 import { useSession } from '@/stores/session';
 
 type Icon = ComponentProps<typeof Ionicons>['name'];
@@ -21,11 +22,12 @@ const TABS: { name: string; key: string; icon: Icon; switcher: boolean }[] = [
 
 export default function TabsLayout() {
   const { t } = useTranslation();
+  const colors = usePalette();
   useSpaceRealtime(useActiveSpace()?.id);
   usePushNotifications(useSession((s) => s.session?.user.id));
 
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: '#0B7A44', tabBarInactiveTintColor: '#6B7280' }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: colors.brandInk, tabBarInactiveTintColor: colors.muted }}>
       {TABS.map((tab) => (
         <Tabs.Screen
           key={tab.name}

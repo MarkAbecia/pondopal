@@ -29,6 +29,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         await app.state.redis.aclose()
 
     app = FastAPI(title="PondoPal API", version="0.1.0", lifespan=lifespan)
+    app.state.settings = settings
     app.state.verifier = TokenVerifier(settings.supabase_jwks_url, settings.supabase_jwt_secret)
     app.middleware("http")(request_context)
     install_error_handlers(app)

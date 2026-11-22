@@ -16,7 +16,7 @@ function Bar({ spent, limit }: { spent: number; limit: number }) {
     <View
       accessibilityRole="progressbar"
       accessibilityValue={{ min: 0, max: 100, now: pct }}
-      className="h-2 overflow-hidden rounded-full bg-gray-200">
+      className="h-2 overflow-hidden rounded-full bg-line-soft">
       <View className={`h-2 ${spent > limit ? 'bg-expense' : 'bg-brand'}`} style={{ width: `${pct}%` }} />
     </View>
   );
@@ -56,7 +56,7 @@ export default function Budgets() {
       {s?.lines.map((line) => (
         <Card key={line.categoryId}>
           <View className="flex-row justify-between">
-            <Text className="text-base text-gray-900">{line.name}</Text>
+            <Text className="text-base text-fg">{line.name}</Text>
             <Muted>{t('budgets.spentOf', { spent: formatPHP(line.spent), limit: formatPHP(line.limit) })}</Muted>
           </View>
           <Bar spent={line.spent} limit={line.limit} />

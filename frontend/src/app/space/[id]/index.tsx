@@ -25,11 +25,11 @@ export default function SpaceDashboard() {
       <Card>
         <Muted>{t('home.thisMonth')}</Muted>
         <View className="flex-row justify-between">
-          <Text className="text-gray-700">{t('home.income')}</Text>
+          <Text className="text-fg-2">{t('home.income')}</Text>
           <Money centavos={totals.income} type="income" />
         </View>
         <View className="flex-row justify-between">
-          <Text className="text-gray-700">{t('home.expense')}</Text>
+          <Text className="text-fg-2">{t('home.expense')}</Text>
           <Money centavos={totals.expense} type="expense" />
         </View>
       </Card>

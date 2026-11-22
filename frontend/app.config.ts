@@ -1,5 +1,9 @@
 import type { ExpoConfig } from 'expo/config';
 
+// Set by EAS per build profile (eas.json `environment`); see README "Builds".
+const projectId = process.env.EAS_PROJECT_ID;
+const bundleId = process.env.APP_BUNDLE_ID ?? 'com.pondopal.app';
+
 const config: ExpoConfig = {
   name: 'PondoPal',
   slug: 'pondopal',
@@ -10,10 +14,12 @@ const config: ExpoConfig = {
   userInterfaceStyle: 'automatic',
   ios: {
     icon: './assets/expo.icon',
+    bundleIdentifier: bundleId,
   },
   android: {
+    package: bundleId,
     adaptiveIcon: {
-      backgroundColor: '#E6F4FE',
+      backgroundColor: '#E6F6EE',
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',
@@ -36,12 +42,15 @@ const config: ExpoConfig = {
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#208AEF',
+        backgroundColor: '#F9FAFB',
         image: './assets/images/splash-icon.png',
         imageWidth: 76,
+        dark: { backgroundColor: '#0B0F14' },
       },
     ],
   ],
+  // projectId is needed for push tokens (src/features/notifications/push.ts)
+  extra: projectId ? { eas: { projectId } } : {},
   experiments: {
     typedRoutes: true,
     reactCompiler: true,

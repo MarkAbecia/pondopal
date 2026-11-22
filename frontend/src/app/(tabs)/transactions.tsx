@@ -17,9 +17,9 @@ function Row({ txn }: { txn: Txn }) {
       accessibilityRole="button"
       accessibilityLabel={`${title}, ${txn.type === 'expense' ? '-' : '+'}${formatPHP(txn.amount_centavos)}, ${date}`}
       onPress={() => router.push(`/transaction/${txn.id}`)}
-      className="min-h-11 flex-row items-center justify-between border-b border-gray-100 px-4 py-3">
+      className="min-h-11 flex-row items-center justify-between border-b border-line-soft px-4 py-3">
       <View className="flex-1 pr-2">
-        <Text className="text-base text-gray-900">{title}</Text>
+        <Text className="text-base text-fg">{title}</Text>
         <Muted>{txn.note ? `${date} · ${txn.note}` : date}</Muted>
       </View>
       <Money centavos={txn.amount_centavos} type={txn.type} />
@@ -34,7 +34,7 @@ export default function Transactions() {
   const rows = q.data?.pages.flat() ?? [];
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-card">
       {canWrite(active?.role) ? (
         <View className="p-4">
           <Button label={t('transactions.add')} onPress={() => router.push('/transaction/new')} />

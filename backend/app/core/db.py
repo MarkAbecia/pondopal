@@ -29,3 +29,14 @@ async def user_db(request: Request, user: CurrentUser) -> AsyncIterator[AsyncCon
 
 
 UserDb = Annotated[AsyncConnection, Depends(user_db)]
+
+
+async def admin_db(request: Request, user: CurrentUser) -> AsyncIterator[AsyncConnection]:
+    """Privileged connection (no RLS) for the caller's own RA 10173 export and deletion only.
+    Every query on it must be scoped to the caller's id (ADR 0004)."""
+    engine: AsyncEngine = request.app.state.engine
+    async with engine.begin() as conn:
+        yield conn
+
+
+AdminDb = Annotated[AsyncConnection, Depends(admin_db)]

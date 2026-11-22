@@ -1,26 +1,87 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 
-import { Button, Card, Muted, Screen } from '@/components/ui';
+import { Button, Card, Choice, ErrorNote, Muted, Screen, Title } from '@/components/ui';
+import { deleteMyAccount, exportMyData } from '@/features/account/api';
 import { unregisterPush } from '@/features/notifications/push';
+import { deviceLanguage } from '@/i18n';
 import { supabase } from '@/lib/supabase';
 import { useSession } from '@/stores/session';
+import { useSettings } from '@/stores/settings';
+
+type Pick = 'system' | 'en' | 'fil';
 
 export default function Profile() {
   const { t } = useTranslation();
   const user = useSession((s) => s.session?.user);
   const name = (user?.user_metadata as { full_name?: string } | undefined)?.full_name;
+  const language = useSettings((s) => s.language);
+  const setLanguage = useSettings((s) => s.setLanguage);
+  const [busy, setBusy] = useState<'export' | 'delete' | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const pickLanguage = (value: Pick) => {
+    setLanguage(value);
+    // saved on the profile too, for server-side messages; best effort
+    if (user) {
+      const locale = value === 'system' ? deviceLanguage() : value;
+      void supabase.from('profiles').update({ locale }).eq('user_id', user.id);
+    }
+  };
+
+  const run = async (kind: 'export' | 'delete', action: () => Promise<void>) => {
+    setBusy(kind);
+    setError(null);
+    try {
+      await action();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : t('common.error'));
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const confirmDelete = () =>
+    Alert.alert(t('profile.deleteTitle'), t('profile.deleteBody'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      { text: t('profile.deleteConfirm'), style: 'destructive', onPress: () => void run('delete', deleteMyAccount) },
+    ]);
 
   return (
     <Screen>
       <Card>
-        <Text className="text-base font-semibold text-gray-900">{name ?? '—'}</Text>
+        <Text className="text-base font-semibold text-fg">{name ?? '—'}</Text>
         <Muted>{user?.email ?? user?.phone ?? ''}</Muted>
       </Card>
-      <Button label={t('auth.signOut')} variant="danger" onPress={async () => {
+
+      <Choice<Pick>
+        label={t('profile.language')}
+        options={(['system', 'en', 'fil'] as const).map((value) => ({ value, label: t(`profile.languages.${value}`) }))}
+        value={language}
+        onChange={pickLanguage}
+      />
+
+      <Button
+        label={t('auth.signOut')}
+        variant="secondary"
+        onPress={async () => {
           if (user) await unregisterPush(user.id).catch(() => undefined);
           await supabase.auth.signOut();
-        }} />
+        }}
+      />
+
+      <Title>{t('profile.privacy')}</Title>
+      <Muted>{t('profile.privacyHint')}</Muted>
+      {error ? <ErrorNote message={error} /> : null}
+      <Button
+        label={t('profile.export')}
+        variant="secondary"
+        loading={busy === 'export'}
+        disabled={busy !== null}
+        onPress={() => void run('export', exportMyData)}
+      />
+      <Button label={t('profile.delete')} variant="danger" loading={busy === 'delete'} disabled={busy !== null} onPress={confirmDelete} />
     </Screen>
   );
 }

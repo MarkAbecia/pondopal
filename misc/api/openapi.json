@@ -343,6 +343,61 @@
         }
       }
     },
+    "/v1/me/export": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Export My Data",
+        "description": "Everything you've put into PondoPal, as JSON (RA 10173 right to data portability).",
+        "operationId": "export_my_data_v1_me_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "items": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "type": "object",
+                  "title": "Response Export My Data V1 Me Export Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/me": {
+      "delete": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Delete My Account",
+        "description": "Deletes the account and personal data (RA 10173 right to erasure). Shared spaces you own\npass to another member; transactions you logged there stay, no longer linked to you.",
+        "operationId": "delete_my_account_v1_me_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/health": {
       "get": {
         "tags": [

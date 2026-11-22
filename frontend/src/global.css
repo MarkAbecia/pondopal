@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Theme colors are CSS variables set at the app root from src/lib/theme.ts (light and dark).
+   These are the light values, as a fallback for anything rendered outside that root. */
+:root {
+  --canvas: 249 250 251;
+  --card: 255 255 255;
+  --fg: 17 24 39;
+  --fg-2: 55 65 81;
+  --muted: 75 85 99;
+  --line: 209 213 219;
+  --line-soft: 229 231 235;
+  --brand: 11 128 67;
+  --brand-soft: 230 246 238;
+  --brand-ink: 6 95 50;
+  --income: 11 128 67;
+  --expense: 197 34 31;
+  --danger-soft: 254 242 242;
+}

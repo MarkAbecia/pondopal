@@ -1,0 +1,21 @@
+meta {
+  name: Add challenge entry
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/v1/challenges/{{challengeId}}/entries
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "cell_index": 1
+  }
+}

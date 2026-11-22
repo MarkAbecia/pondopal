@@ -1,0 +1,28 @@
+meta {
+  name: Create challenge
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/v1/challenges
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "space_id": "{{spaceId}}",
+    "template_key": "week_52",
+    "name": "52-Week Challenge",
+    "settings": { "leaderboard": true }
+  }
+}
+
+script:post-response {
+  if (res.status === 201) bru.setEnvVar("challengeId", res.body.id);
+}

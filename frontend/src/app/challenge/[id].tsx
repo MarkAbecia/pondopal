@@ -36,9 +36,16 @@ function Cell({
       accessibilityState={{ checked: done, disabled }}
       disabled={disabled}
       onPress={() => onPress(index, done)}
-      className={`m-0.5 h-11 w-11 items-center justify-center rounded-lg border ${done ? 'border-brand bg-brand' : 'border-gray-300 bg-white'}`}>
-      <Text className={`text-xs font-semibold ${done ? 'text-white' : 'text-gray-700'}`}>{index}</Text>
-      {amount !== null ? <Text className={`text-[9px] ${done ? 'text-white' : 'text-gray-500'}`}>{shortPesos(amount)}</Text> : null}
+      className={`m-0.5 h-11 w-11 items-center justify-center rounded-lg border ${done ? 'border-brand bg-brand' : 'border-line bg-card'}`}>
+      {/* fixed 44pt cells: cap scaling so big system fonts don't overflow; the full value is in the label */}
+      <Text maxFontSizeMultiplier={1.3} className={`text-xs font-semibold ${done ? 'text-white' : 'text-fg-2'}`}>
+        {index}
+      </Text>
+      {amount !== null ? (
+        <Text maxFontSizeMultiplier={1.3} className={`text-[10px] ${done ? 'text-white' : 'text-muted'}`}>
+          {shortPesos(amount)}
+        </Text>
+      ) : null}
     </Pressable>
   );
 }
@@ -61,7 +68,7 @@ function Members({ data, me }: { data: ChallengeProgress; me: string | undefined
         <View key={m.user_id} className="min-h-11 flex-row items-center gap-3">
           {ranked ? <Text className="w-6 text-base font-bold text-brand-dark">{i + 1}</Text> : null}
           <View className="flex-1">
-            <Text className="text-base text-gray-900">{m.user_id === me ? t('ipon.you') : (m.display_name ?? '—')}</Text>
+            <Text className="text-base text-fg">{m.user_id === me ? t('ipon.you') : (m.display_name ?? '—')}</Text>
             <Muted>{line(m)}</Muted>
           </View>
           {m.streak > 0 ? <Muted>{t(`ipon.streak_${unit}`, { count: m.streak })}</Muted> : null}
@@ -148,13 +155,13 @@ export default function ChallengeScreen() {
       <Stack.Screen options={{ title: ch.name }} />
       <ProgressRing percent={mine.percent ?? 0} label={headline}>
         {noSpend ? (
-          <Text className="text-3xl font-bold text-gray-900">{mine.cells_done}</Text>
+          <Text className="text-3xl font-bold text-fg">{mine.cells_done}</Text>
         ) : (
           <Money centavos={mine.saved_centavos} className="text-xl" />
         )}
         {mine.percent !== null ? <Muted>{`${mine.percent}%`}</Muted> : null}
       </ProgressRing>
-      <Text className="text-center text-base text-gray-700">{headline}</Text>
+      <Text className="text-center text-base text-fg-2">{headline}</Text>
       <Text accessibilityRole="text" className="text-center text-lg font-semibold text-brand-dark">
         {t(`ipon.streak_${unit}`, { count: mine.streak })}
       </Text>

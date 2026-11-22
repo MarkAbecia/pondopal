@@ -25,7 +25,7 @@ export default function Spaces() {
       {error ? <ErrorNote message={t('common.error')} onRetry={refetch} retryLabel={t('common.retry')} /> : null}
       {spaces.map((s) => (
         <Card key={s.id} label={s.name} onPress={() => router.push(`/space/${s.id}`)}>
-          <Text className="text-base font-semibold text-gray-900">{s.name}</Text>
+          <Text className="text-base font-semibold text-fg">{s.name}</Text>
           <Muted>{`${t(`spaces.types.${s.type}`)} · ${t(`spaces.roles.${s.role}`)}`}</Muted>
         </Card>
       ))}

@@ -27,4 +27,4 @@ Layout, filled in from Phase 3 onward:
 - `jobs.py` (scheduled reminders) and `worker.py` (the APScheduler process that runs them)
 - `integrations/` (Expo Push)
 
-User requests query Postgres **under RLS** as `authenticated` (see `misc/docs/adr/0004-rls-first.md`).
+User requests query Postgres **under RLS** as `authenticated` (see `misc/docs/adr/0004-rls-first.md`). The one exception is `/v1/me` (data export and account deletion, `misc/docs/privacy.md`), which uses the privileged connection and scopes every query to the caller. Storage cleanup on deletion needs `SUPABASE_SERVICE_ROLE_KEY`.

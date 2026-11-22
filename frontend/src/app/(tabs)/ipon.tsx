@@ -22,7 +22,7 @@ export default function Ipon() {
       {ipon.data?.challenges.length === 0 ? <Muted>{t('ipon.emptyChallenges')}</Muted> : null}
       {ipon.data?.challenges.map((c) => (
         <Card key={c.id} label={c.name} onPress={() => router.push(`/challenge/${c.id}`)}>
-          <Text className="text-base font-semibold text-gray-900">{c.name}</Text>
+          <Text className="text-base font-semibold text-fg">{c.name}</Text>
           <Muted>{templateName(c.template_key)}</Muted>
         </Card>
       ))}
@@ -32,7 +32,7 @@ export default function Ipon() {
       {ipon.data?.goals.length === 0 ? <Muted>{t('ipon.emptyGoals')}</Muted> : null}
       {ipon.data?.goals.map((g) => (
         <Card key={g.id} label={g.name} onPress={() => router.push(`/goal/${g.id}`)}>
-          <Text className="text-base font-semibold text-gray-900">{g.name}</Text>
+          <Text className="text-base font-semibold text-fg">{g.name}</Text>
           <Money centavos={g.target_centavos} />
           <Muted>{g.deadline}</Muted>
         </Card>

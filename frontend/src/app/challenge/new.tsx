@@ -12,7 +12,7 @@ import { formatPHP, fromCentavos, parsePesos } from '@/lib/money';
 function Toggle({ label, value, onChange }: { label: string; value: boolean; onChange: (v: boolean) => void }) {
   return (
     <View className="min-h-11 flex-row items-center justify-between gap-2">
-      <Text className="flex-1 text-base text-gray-900">{label}</Text>
+      <Text className="flex-1 text-base text-fg">{label}</Text>
       <Switch accessibilityLabel={label} value={value} onValueChange={onChange} />
     </View>
   );

@@ -1,0 +1,15 @@
+meta {
+  name: Delete my account (RA 10173, irreversible)
+  type: http
+  seq: 10
+}
+
+delete {
+  url: {{baseUrl}}/v1/me
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}

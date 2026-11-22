@@ -126,8 +126,6 @@
     "cell": "{{label}} {{index}}, {{amount}}",
     "week": "Week",
     "day": "Day",
-    "cellDone": "saved",
-    "cellTodo": "not yet saved",
     "cellHint": "Double tap to mark as saved",
     "undoTitle": "Undo this entry?",
     "undo": "Undo",
@@ -163,5 +161,20 @@
     "contributions": "Recent contributions",
     "deadlinePast": "Pick a date after today",
     "invalidTarget": "Enter an amount like 5000"
+  },
+  "profile": {
+    "language": "Language",
+    "languages": {
+      "system": "Phone setting",
+      "en": "English",
+      "fil": "Filipino"
+    },
+    "privacy": "Your data",
+    "privacyHint": "Under the Data Privacy Act (RA 10173) you can download or delete your data anytime.",
+    "export": "Download my data",
+    "delete": "Delete my account",
+    "deleteTitle": "Delete your account?",
+    "deleteBody": "This removes your profile, personal space, receipts and everything you saved. Shared spaces you own pass to another member, and expenses you logged there stay without your name. This can't be undone.",
+    "deleteConfirm": "Delete forever"
   }
 }

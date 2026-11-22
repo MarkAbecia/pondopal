@@ -38,7 +38,11 @@ misc/ci/database.sh   # needs Docker
 misc/ci/security.sh   # Trivy, needs Docker
 ```
 
+## Builds
+The app builds with EAS (`frontend/eas.json`): `development`, `preview` and `production` profiles. See `frontend/README.md`.
+
 ## Conventions
 - Money is integer centavos (ADR 0003). Timestamps are `timestamptz` (UTC), and display uses `Asia/Manila`.
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
 - Only `.env.example` files are committed, never `.env`.
+- Personal data follows RA 10173: see `misc/docs/privacy.md`.

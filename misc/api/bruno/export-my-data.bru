@@ -1,0 +1,15 @@
+meta {
+  name: Export my data (RA 10173)
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{baseUrl}}/v1/me/export
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}

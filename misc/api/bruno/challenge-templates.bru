@@ -1,0 +1,15 @@
+meta {
+  name: Challenge templates
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/v1/challenges/templates
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}

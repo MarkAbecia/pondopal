@@ -15,15 +15,15 @@ function Totals({ income, expense }: { income: number; expense: number }) {
   return (
     <>
       <View className="flex-row justify-between">
-        <Text className="text-gray-700">{t('home.income')}</Text>
+        <Text className="text-fg-2">{t('home.income')}</Text>
         <Money centavos={income} type="income" />
       </View>
       <View className="flex-row justify-between">
-        <Text className="text-gray-700">{t('home.expense')}</Text>
+        <Text className="text-fg-2">{t('home.expense')}</Text>
         <Money centavos={expense} type="expense" />
       </View>
       <View className="flex-row justify-between">
-        <Text className="font-semibold text-gray-900">{t('home.net')}</Text>
+        <Text className="font-semibold text-fg">{t('home.net')}</Text>
         <Money centavos={income - expense} />
       </View>
     </>
@@ -63,7 +63,7 @@ export default function Home() {
             setActive(s.id);
             router.push(`/space/${s.id}`);
           }}>
-          <Text className="text-base font-semibold text-gray-900">{s.name}</Text>
+          <Text className="text-base font-semibold text-fg">{s.name}</Text>
           <Totals {...(summary.data?.bySpace.get(s.id) ?? zero)} />
         </Card>
       ))}

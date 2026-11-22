@@ -10,12 +10,12 @@ import { canWrite, useMySpaces } from '@/features/spaces/api';
 import { manilaDate } from '@/lib/dates';
 import { formatPHP, parsePesos } from '@/lib/money';
 
-const STATUS_STYLE = { on_track: 'bg-brand-light text-brand-dark', behind: 'bg-red-50 text-expense', done: 'bg-brand text-white' };
+const STATUS_STYLE = { on_track: 'bg-brand-light text-brand-dark', behind: 'bg-danger-soft text-expense', done: 'bg-brand text-white' };
 
 function Row({ label, centavos }: { label: string; centavos: number }) {
   return (
     <View className="min-h-11 flex-row items-center justify-between">
-      <Text className="text-base text-gray-700">{label}</Text>
+      <Text className="text-base text-fg-2">{label}</Text>
       <Money centavos={centavos} className="text-base" />
     </View>
   );
@@ -54,7 +54,7 @@ export default function GoalScreen() {
         <Money centavos={plan.contributed_centavos} className="text-xl" />
         <Muted>{`${percent}%`}</Muted>
       </ProgressRing>
-      <Text className="text-center text-base text-gray-700">{summary}</Text>
+      <Text className="text-center text-base text-fg-2">{summary}</Text>
       <Text className={`self-center rounded-full px-4 py-1 text-base font-semibold ${STATUS_STYLE[plan.status]}`}>
         {t(`ipon.status.${plan.status}`)}
       </Text>

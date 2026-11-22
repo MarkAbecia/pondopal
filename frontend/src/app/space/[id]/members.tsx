@@ -31,7 +31,7 @@ export default function Members() {
         <Card key={m.id}>
           <View className="flex-row items-center justify-between gap-2">
             <View className="flex-1">
-              <Text className="text-base text-gray-900">{m.name ?? '—'}</Text>
+              <Text className="text-base text-fg">{m.name ?? '—'}</Text>
               <Muted>{t(`spaces.roles.${m.role}`)}</Muted>
             </View>
             {manager && m.role !== 'owner' && m.userId !== me ? (

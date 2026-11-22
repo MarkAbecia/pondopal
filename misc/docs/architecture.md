@@ -13,7 +13,8 @@ Expo app ──supabase-js──▶ Supabase (Auth, Postgres + RLS, Realtime, St
 - **Plain CRUD.** Transactions, budgets and bills go from the app to PostgREST, and RLS decides what is allowed.
 - **Realtime.** The app subscribes to `transactions`, `challenge_entries` and `goal_contributions` for the active shared space.
 - **Business logic.** Invites, challenge progress, goal plans, settle-up and paluwagan go from the app to FastAPI. FastAPI verifies the JWT (JWKS first, then the legacy secret), then queries Postgres under RLS (ADR 0004).
-- **Jobs.** A single worker runs the daily 08:00 `Asia/Manila` bill reminders, streak nudges and paluwagan due alerts, and sends them through Expo Push.
+- **Jobs.** A single worker (`python -m app.worker`) runs the 08:00 `Asia/Manila` bill reminders and paluwagan due alerts and the 20:00 streak nudges, stores each in `notifications`, and sends them through Expo Push.
+- **Privacy.** Data export and account deletion (`/v1/me`) are the only user requests that use the privileged connection; every query there is scoped to the caller. See `privacy.md`.
 - **Files.** Receipts go to the private `receipts` bucket under `space_id/…`. Avatars go to the public-read `avatars` bucket.
 
 ## Decisions
