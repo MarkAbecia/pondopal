@@ -89,6 +89,7 @@ async def test_export_has_only_my_data(api: httpx.AsyncClient) -> None:
     assert sorted(t["note"] for t in data["transactions"]) == ["pizza", "secret"]
     assert {s["name"] for s in data["spaces"]} >= {"Barkada", "Solo"}
     assert (await api.get("/v1/me/export", headers=as_user(BEN))).json()["transactions"] == []
+    assert {"split_shares", "settlements", "paluwagan_contributions"} <= set(data)
 
 
 async def test_delete_account(api: httpx.AsyncClient) -> None:

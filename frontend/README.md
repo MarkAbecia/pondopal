@@ -29,6 +29,8 @@ npm start
   - New transactions get their id on the device, so a retried save can never create a duplicate.
 - **Realtime:** the tab layout subscribes to `transactions`, `challenge_entries` and `goal_contributions` for the active space, so other members' changes refresh lists, grids and goals live.
 - **Ipon:** challenge amounts come from the backend (`/v1/challenges/...`); `src/features/ipon/grid.ts` only labels cells. Ticking a cell shows right away and rolls back if the request fails. Ticking needs a connection.
+- **Splits and settle-up:** a saved expense in a shared space shows a split editor (equally, by percentage or exact amounts) to the payer and owners/admins. The space dashboard's **Settle up** shows balances and the fewest payments that clear them; you can mark a suggested payment as paid. The backend does all the dividing.
+- **Paluwagan:** shared spaces list their paluwagan on the Ipon tab. Owners/admins start one and pick the payout order; members mark their own hulog as paid, and owners/admins can mark anyone's.
 - **Push:** after sign-in the app asks for notification permission and saves the Expo push token to your profile. This needs an EAS project id (`extra.eas.projectId`, set by `eas init`); without one, push is skipped and reminders only appear in the in-app inbox. Signing out clears the token.
 - **Spaces:**
   - The header switcher sets the active space, which is persisted in Zustand.

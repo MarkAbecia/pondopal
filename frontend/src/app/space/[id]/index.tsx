@@ -42,7 +42,10 @@ export default function SpaceDashboard() {
       />
       <Button label={t('spaces.budgets')} variant="secondary" onPress={() => router.push(`/space/${space.id}/budgets`)} />
       {space.type !== 'personal' ? (
-        <Button label={t('spaces.members')} variant="secondary" onPress={() => router.push(`/space/${space.id}/members`)} />
+        <>
+          <Button label={t('spaces.members')} variant="secondary" onPress={() => router.push(`/space/${space.id}/members`)} />
+          <Button label={t('splits.settleUp')} variant="secondary" onPress={() => router.push(`/space/${space.id}/settle`)} />
+        </>
       ) : null}
       <Button label={t('spaces.bills')} variant="secondary" disabled onPress={() => {}} />
       {leave.error ? <ErrorNote message={leave.error.message} /> : null}

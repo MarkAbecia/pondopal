@@ -343,6 +343,289 @@
         }
       }
     },
+    "/v1/transactions/{txn_id}/splits": {
+      "put": {
+        "tags": [
+          "splits & paluwagan"
+        ],
+        "summary": "Set Splits",
+        "description": "Split an expense equally, by percentage (basis points) or by exact amounts.\nReplaces any earlier split of the same expense.",
+        "operationId": "set_splits_v1_transactions__txn_id__splits_put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "txn_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Txn Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SplitIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Share"
+                  },
+                  "title": "Response Set Splits V1 Transactions  Txn Id  Splits Put"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/spaces/{space_id}/settle-up": {
+      "get": {
+        "tags": [
+          "splits & paluwagan"
+        ],
+        "summary": "Settle Up",
+        "description": "Who owes whom, as the fewest transfers that settle everyone.",
+        "operationId": "settle_up_v1_spaces__space_id__settle_up_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "space_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Space Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettleUp"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/paluwagan": {
+      "post": {
+        "tags": [
+          "splits & paluwagan"
+        ],
+        "summary": "Create Paluwagan",
+        "operationId": "create_paluwagan_v1_paluwagan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaluwaganCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Paluwagan"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/paluwagan/{pal_id}/schedule": {
+      "get": {
+        "tags": [
+          "splits & paluwagan"
+        ],
+        "summary": "Paluwagan Schedule",
+        "operationId": "paluwagan_schedule_v1_paluwagan__pal_id__schedule_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Pal Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Schedule"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/paluwagan/{pal_id}/rounds/{n}/pay": {
+      "post": {
+        "tags": [
+          "splits & paluwagan"
+        ],
+        "summary": "Pay Round",
+        "description": "Mark a contribution as paid (or unpaid with \"paid\": false). Members mark their own;\nowners and admins can mark anyone's.",
+        "operationId": "pay_round_v1_paluwagan__pal_id__rounds__n__pay_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Pal Id"
+            }
+          },
+          {
+            "name": "n",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "title": "N"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/PayIn"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Paid"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/me/export": {
       "get": {
         "tags": [
@@ -426,6 +709,37 @@
   },
   "components": {
     "schemas": {
+      "Balance": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "net_centavos": {
+            "type": "integer",
+            "title": "Net Centavos"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "display_name",
+          "net_centavos"
+        ],
+        "title": "Balance"
+      },
       "Challenge": {
         "properties": {
           "id": {
@@ -725,6 +1039,16 @@
         "title": "EntryCreate",
         "description": "Grid templates need cell_index; bill_50 needs bills; custom needs amount_centavos."
       },
+      "Frequency": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "weekly",
+          "semi_monthly",
+          "monthly"
+        ],
+        "title": "Frequency"
+      },
       "GoalPlan": {
         "properties": {
           "goal_id": {
@@ -918,6 +1242,37 @@
         "type": "object",
         "title": "InviteCreate"
       },
+      "Member": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "payout_order": {
+            "type": "integer",
+            "title": "Payout Order"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "display_name",
+          "payout_order"
+        ],
+        "title": "Member"
+      },
       "MemberProgress": {
         "properties": {
           "user_id": {
@@ -994,6 +1349,399 @@
           "streak"
         ],
         "title": "MemberProgress"
+      },
+      "Paid": {
+        "properties": {
+          "round_number": {
+            "type": "integer",
+            "title": "Round Number"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "paid_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paid At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "round_number",
+          "user_id",
+          "paid_at"
+        ],
+        "title": "Paid"
+      },
+      "Paluwagan": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "space_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Space Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "contribution_centavos": {
+            "type": "integer",
+            "title": "Contribution Centavos"
+          },
+          "frequency": {
+            "type": "string",
+            "title": "Frequency"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Start Date"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "space_id",
+          "name",
+          "contribution_centavos",
+          "frequency",
+          "start_date",
+          "status"
+        ],
+        "title": "Paluwagan"
+      },
+      "PaluwaganCreate": {
+        "properties": {
+          "space_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Space Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "contribution_centavos": {
+            "type": "integer",
+            "maximum": 10000000000.0,
+            "minimum": 100.0,
+            "title": "Contribution Centavos"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/Frequency"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Start Date"
+          },
+          "member_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 60,
+            "minItems": 2,
+            "title": "Member Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "space_id",
+          "name",
+          "contribution_centavos",
+          "frequency",
+          "start_date",
+          "member_ids"
+        ],
+        "title": "PaluwaganCreate"
+      },
+      "PayIn": {
+        "properties": {
+          "user_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Id"
+          },
+          "paid": {
+            "type": "boolean",
+            "title": "Paid",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "PayIn"
+      },
+      "Payment": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "paid_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paid At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "paid_at"
+        ],
+        "title": "Payment"
+      },
+      "Round": {
+        "properties": {
+          "round_number": {
+            "type": "integer",
+            "title": "Round Number"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Due Date"
+          },
+          "recipient_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipient Id"
+          },
+          "pot_centavos": {
+            "type": "integer",
+            "title": "Pot Centavos"
+          },
+          "paid_count": {
+            "type": "integer",
+            "title": "Paid Count"
+          },
+          "payments": {
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            },
+            "type": "array",
+            "title": "Payments"
+          }
+        },
+        "type": "object",
+        "required": [
+          "round_number",
+          "due_date",
+          "recipient_id",
+          "pot_centavos",
+          "paid_count",
+          "payments"
+        ],
+        "title": "Round"
+      },
+      "Schedule": {
+        "properties": {
+          "paluwagan": {
+            "$ref": "#/components/schemas/Paluwagan"
+          },
+          "members": {
+            "items": {
+              "$ref": "#/components/schemas/Member"
+            },
+            "type": "array",
+            "title": "Members"
+          },
+          "rounds": {
+            "items": {
+              "$ref": "#/components/schemas/Round"
+            },
+            "type": "array",
+            "title": "Rounds"
+          },
+          "current_round": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Round"
+          }
+        },
+        "type": "object",
+        "required": [
+          "paluwagan",
+          "members",
+          "rounds",
+          "current_round"
+        ],
+        "title": "Schedule"
+      },
+      "SettleUp": {
+        "properties": {
+          "balances": {
+            "items": {
+              "$ref": "#/components/schemas/Balance"
+            },
+            "type": "array",
+            "title": "Balances"
+          },
+          "transfers": {
+            "items": {
+              "$ref": "#/components/schemas/TransferOut"
+            },
+            "type": "array",
+            "title": "Transfers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "balances",
+          "transfers"
+        ],
+        "title": "SettleUp"
+      },
+      "Share": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "share_centavos": {
+            "type": "integer",
+            "title": "Share Centavos"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "share_centavos"
+        ],
+        "title": "Share"
+      },
+      "ShareIn": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10000000000.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id"
+        ],
+        "title": "ShareIn"
+      },
+      "SplitIn": {
+        "properties": {
+          "method": {
+            "$ref": "#/components/schemas/SplitMethod"
+          },
+          "shares": {
+            "items": {
+              "$ref": "#/components/schemas/ShareIn"
+            },
+            "type": "array",
+            "maxItems": 50,
+            "minItems": 1,
+            "title": "Shares"
+          }
+        },
+        "type": "object",
+        "required": [
+          "method",
+          "shares"
+        ],
+        "title": "SplitIn"
+      },
+      "SplitMethod": {
+        "type": "string",
+        "enum": [
+          "equal",
+          "percent",
+          "exact"
+        ],
+        "title": "SplitMethod"
+      },
+      "TransferOut": {
+        "properties": {
+          "from_user": {
+            "type": "string",
+            "format": "uuid",
+            "title": "From User"
+          },
+          "to_user": {
+            "type": "string",
+            "format": "uuid",
+            "title": "To User"
+          },
+          "amount_centavos": {
+            "type": "integer",
+            "title": "Amount Centavos"
+          }
+        },
+        "type": "object",
+        "required": [
+          "from_user",
+          "to_user",
+          "amount_centavos"
+        ],
+        "title": "TransferOut"
       },
       "ValidationError": {
         "properties": {

@@ -1,0 +1,15 @@
+meta {
+  name: Paluwagan schedule
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{baseUrl}}/v1/paluwagan/{{paluwaganId}}/schedule
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}

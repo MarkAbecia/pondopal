@@ -4,13 +4,17 @@ import { Text } from 'react-native';
 
 import { Button, Card, ErrorNote, Money, Muted, Screen, Title } from '@/components/ui';
 import { useIpon, useTemplates } from '@/features/ipon/api';
+import { usePaluwagans } from '@/features/paluwagan/api';
 import { canManage, useActiveSpace } from '@/features/spaces/api';
+import { formatPHP } from '@/lib/money';
 
 export default function Ipon() {
   const { t } = useTranslation();
   const space = useActiveSpace();
   const ipon = useIpon(space?.id);
   const templates = useTemplates();
+  const shared = !!space && space.type !== 'personal';
+  const paluwagans = usePaluwagans(shared ? space.id : undefined);
   const manager = canManage(space?.role);
   const templateName = (key: string) => templates.data?.find((x) => x.key === key)?.name ?? key;
 
@@ -38,6 +42,23 @@ export default function Ipon() {
         </Card>
       ))}
       {manager ? <Button label={t('ipon.newGoal')} variant="secondary" onPress={() => router.push('/goal/new')} /> : null}
+
+      {shared ? (
+        <>
+          <Title>{t('paluwagan.title')}</Title>
+          {paluwagans.data?.length === 0 ? <Muted>{t('paluwagan.empty')}</Muted> : null}
+          {paluwagans.data?.map((p) => (
+            <Card key={p.id} label={p.name} onPress={() => router.push(`/paluwagan/${p.id}`)}>
+              <Text className="text-base font-semibold text-fg">{p.name}</Text>
+              <Muted>
+                {t('paluwagan.each', { amount: formatPHP(p.contribution_centavos), every: t(`ipon.freq.${p.frequency}`) })}
+              </Muted>
+              {p.status === 'completed' ? <Muted>{t('paluwagan.done')}</Muted> : null}
+            </Card>
+          ))}
+          {manager ? <Button label={t('paluwagan.new')} variant="secondary" onPress={() => router.push('/paluwagan/new')} /> : null}
+        </>
+      ) : null}
     </Screen>
   );
 }

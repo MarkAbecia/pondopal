@@ -895,6 +895,15 @@ export type Database = {
       }
       is_space_member: { Args: { p_space_id: string }; Returns: boolean }
       leave_space: { Args: { p_space_id: string }; Returns: undefined }
+      pay_paluwagan_round: {
+        Args: {
+          p_paid?: boolean
+          p_paluwagan_id: string
+          p_round: number
+          p_user_id: string
+        }
+        Returns: string
+      }
       shares_space_with: { Args: { p_user_id: string }; Returns: boolean }
       space_id_from_path: { Args: { p_name: string }; Returns: string }
       space_role: {

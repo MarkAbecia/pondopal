@@ -18,6 +18,11 @@ export function useSpaceRealtime(spaceId: string | undefined) {
       void qc.invalidateQueries({ queryKey: ['challenge'] });
       void qc.invalidateQueries({ queryKey: ['goal'] });
     };
+    const shared = () => {
+      void qc.invalidateQueries({ queryKey: ['splits'] });
+      void qc.invalidateQueries({ queryKey: ['settle-up', spaceId] });
+      void qc.invalidateQueries({ queryKey: ['paluwagan'] });
+    };
     // RLS applies to Realtime too: only rows this user can read are delivered.
     const channel = supabase
       .channel(`space:${spaceId}`)
@@ -35,8 +40,11 @@ export function useSpaceRealtime(spaceId: string | undefined) {
         'postgres_changes',
         { event: '*', schema: 'public', table: 'goal_contributions', filter: `space_id=eq.${spaceId}` },
         ipon,
-      )
-      .subscribe();
+      );
+    for (const table of ['transaction_splits', 'settlements', 'paluwagan_rounds'] as const) {
+      channel.on('postgres_changes', { event: '*', schema: 'public', table, filter: `space_id=eq.${spaceId}` }, shared);
+    }
+    channel.subscribe();
     return () => {
       void supabase.removeChannel(channel);
     };

@@ -183,7 +183,8 @@ async def paluwagan_alerts(conn: AsyncConnection, send: Sender, today: date) -> 
     rows = await conn.execute(
         text(
             """
-            select r.id, r.space_id, r.user_id, r.due_date, p.name, p.contribution_centavos
+            select r.id, r.paluwagan_id, r.space_id, r.user_id, r.due_date, p.name,
+                   p.contribution_centavos
             from public.paluwagan_rounds r
             join public.paluwagan p on p.id = r.paluwagan_id
             where r.paid_at is null and p.status = 'active'
@@ -198,7 +199,12 @@ async def paluwagan_alerts(conn: AsyncConnection, send: Sender, today: date) -> 
             "paluwagan_due",
             f"{r.name} hulog is due {_when(r.due_date, today)}",
             f"{format_php(r.contribution_centavos)} on {r.due_date:%b %d}",
-            {"round_id": str(r.id), "space_id": str(r.space_id), "due": r.due_date.isoformat()},
+            {
+                "round_id": str(r.id),
+                "paluwagan_id": str(r.paluwagan_id),
+                "space_id": str(r.space_id),
+                "due": r.due_date.isoformat(),
+            },
         )
         for r in rows
     ]

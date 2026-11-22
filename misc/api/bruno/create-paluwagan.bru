@@ -1,0 +1,30 @@
+meta {
+  name: Create paluwagan
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{baseUrl}}/v1/paluwagan
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "space_id": "{{spaceId}}",
+    "name": "Paluwagan sa opisina",
+    "contribution_centavos": 100000,
+    "frequency": "semi_monthly",
+    "start_date": "2026-11-30",
+    "member_ids": ["{{userId}}", "{{otherUserId}}"]
+  }
+}
+
+script:post-response {
+  if (res.status === 201) bru.setEnvVar("paluwaganId", res.body.id);
+}

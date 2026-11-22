@@ -1,0 +1,25 @@
+meta {
+  name: Split an expense
+  type: http
+  seq: 11
+}
+
+put {
+  url: {{baseUrl}}/v1/transactions/{{transactionId}}/splits
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "method": "equal",
+    "shares": [
+      { "user_id": "{{userId}}" },
+      { "user_id": "{{otherUserId}}" }
+    ]
+  }
+}

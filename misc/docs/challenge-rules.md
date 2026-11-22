@@ -34,6 +34,20 @@ All amounts are integer centavos. Dates use `Asia/Manila`. The source of truth i
 - When no due date is left (the deadline has passed, or there's no payday before it), the whole remainder is due now.
 - Streaks stay alive until the current day or week is over. No-spend days only count completed days, never today.
 
-**Settle-up (v2).** Compute each member's net balance, then repeatedly match the largest debtor with the largest creditor.
+**Bill splitting (v2).** `PUT /v1/transactions/{id}/splits` (`app/domain/splits.py`):
+- Only expenses in shared spaces, by the payer or an owner/admin. Everyone in the split must be a current member. Saving again replaces the old split.
+- **Equal:** the amount divided by the number of people. Leftover centavos go one each to the first people listed, so the shares always add up exactly (₱1,000 / 3 = ₱333.34 + ₱333.33 + ₱333.33).
+- **Percent:** values in basis points (2500 = 25.00%) that must total 10000. Centavos are split by largest remainder, so the shares again add up exactly.
+- **Exact:** centavo amounts that must total the expense.
 
-**Paluwagan (v2).** With N members contributing C each, every round's pot is N × C. The pot goes to the member whose turn it is in the payout order.
+**Settle-up (v2).** `GET /v1/spaces/{id}/settle-up`:
+- Only split expenses count. For each one, every other person's share is owed to the payer; your own share is plain spending.
+- Recorded settlements (`settlements`, from → to) move the balances back.
+- Expenses whose payer deleted their account are left out, since nobody is left to pay back.
+- Transfers: the biggest debtor pays the biggest creditor, repeatedly, until everyone is at zero. That needs at most n − 1 payments. Ties follow a fixed order, so the suggestion doesn't jump around.
+
+**Paluwagan (v2).** `app/domain/paluwagan.py`:
+- With N members contributing C each, there are N rounds and every round's pot is N × C. Everyone pays every round, the recipient included. Round k's pot goes to the member with `payout_order` k.
+- Due dates: daily and weekly count from the start date. Semi-monthly falls on the 15th and the last day of the month, and monthly on the last day, starting from the first such payday on or after the start date.
+- Members mark their own contribution as paid; owners and admins can mark anyone's. This goes through `pay_paluwagan_round()`, since the rounds table itself is manager-write only. The paluwagan becomes `completed` when every contribution is in, and `active` again if one is unmarked.
+- The 08:00 job reminds each payer of unpaid contributions due today or tomorrow.

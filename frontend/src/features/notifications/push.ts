@@ -48,6 +48,7 @@ export function usePushNotifications(userId: string | undefined) {
     const sub = Notifications.addNotificationResponseReceivedListener((response) => {
       const data = response.notification.request.content.data as Record<string, string | undefined>;
       if (data.challenge_id) router.push(`/challenge/${data.challenge_id}`);
+      else if (data.paluwagan_id) router.push(`/paluwagan/${data.paluwagan_id}`);
       else if (data.kind === 'bill_due' && data.space_id) router.push(`/space/${data.space_id}`);
     });
     return () => sub.remove();

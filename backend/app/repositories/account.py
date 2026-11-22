@@ -26,6 +26,13 @@ EXPORT_QUERIES = {
     "challenge_entries": "select ch.name challenge, e.cell_index, e.amount_centavos, e.saved_at "
     "from public.challenge_entries e join public.challenges ch on ch.id = e.challenge_id "
     "where e.user_id = :u order by e.saved_at",
+    "split_shares": "select x.transaction_id, x.share_centavos, x.created_at "
+    "from public.transaction_splits x where x.user_id = :u order by x.created_at",
+    "settlements": "select space_id, from_user = :u as paid_by_me, amount_centavos, settled_at "
+    "from public.settlements where from_user = :u or to_user = :u order by settled_at",
+    "paluwagan_contributions": "select p.name paluwagan, r.round_number, r.due_date, r.paid_at "
+    "from public.paluwagan_rounds r join public.paluwagan p on p.id = r.paluwagan_id "
+    "where r.user_id = :u order by r.due_date",
     "notifications": "select kind, payload, read_at, created_at from public.notifications "
     "where user_id = :u order by created_at",
 }

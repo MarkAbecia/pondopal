@@ -1,0 +1,21 @@
+meta {
+  name: Pay paluwagan round
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{baseUrl}}/v1/paluwagan/{{paluwaganId}}/rounds/1/pay
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "paid": true
+  }
+}

@@ -7,7 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 
 import { Button, ErrorNote, Muted, Screen } from '@/components/ui';
-import { useActiveSpace } from '@/features/spaces/api';
+import { canManage, useActiveSpace, useMySpaces } from '@/features/spaces/api';
+import { SplitEditor } from '@/features/splits/SplitEditor';
 import {
   type TxnInput,
   uploadReceipt,
@@ -20,6 +21,7 @@ import {
 import { TransactionForm, type TxnFormValues } from '@/features/transactions/TransactionForm';
 import { manilaDate, manilaNoon } from '@/lib/dates';
 import { fromCentavos, toCentavos } from '@/lib/money';
+import { useSession } from '@/stores/session';
 
 export default function TransactionScreen() {
   const { t } = useTranslation();
@@ -29,6 +31,8 @@ export default function TransactionScreen() {
   const existing = useTransaction(isNew ? undefined : id);
   const spaceId = existing.data?.space_id ?? active?.id;
   const categories = useCategories(spaceId);
+  const me = useSession((s) => s.session?.user.id);
+  const space = useMySpaces().data?.find((s) => s.id === spaceId);
   const sources = usePaymentSources();
   const save = useSaveTransaction();
   const remove = useDeleteTransaction();
@@ -133,6 +137,14 @@ export default function TransactionScreen() {
           </>
         }
       />
+      {/* only saved expenses in shared spaces, by the payer or an owner/admin */}
+      {txn &&
+      txn.type === 'expense' &&
+      space &&
+      space.type !== 'personal' &&
+      (canManage(space.role) || (space.role === 'member' && txn.user_id === me)) ? (
+        <SplitEditor txnId={txn.id} spaceId={txn.space_id} amount={txn.amount_centavos} />
+      ) : null}
     </Screen>
   );
 }

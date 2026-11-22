@@ -12,7 +12,7 @@ Access is limited by RLS: people see only spaces they belong to (ADR 0004). The 
 ## Rights
 | Right | How |
 |---|---|
-| Access and portability | Profile → **Download my data**, which calls `GET /v1/me/export` and shares a JSON file. It holds everything the user entered: profile, memberships, payment sources, transactions, goal contributions, challenge entries and notifications. |
+| Access and portability | Profile → **Download my data**, which calls `GET /v1/me/export` and shares a JSON file. It holds everything the user entered: profile, memberships, payment sources, transactions, split shares, settlements, goal contributions, challenge entries, paluwagan contributions and notifications. |
 | Erasure | Profile → **Delete my account**, which calls `DELETE /v1/me`. |
 | Correction | Users edit or delete their own entries in the app. |
 

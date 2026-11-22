@@ -71,6 +71,7 @@ export default function RootLayout() {
               />
               <Stack.Screen name="challenge" />
               <Stack.Screen name="goal" />
+            <Stack.Screen name="paluwagan" />
             </Stack.Protected>
             <Stack.Protected guard={!session}>
               <Stack.Screen name="(auth)" />
