@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+asyncpg://postgres:postgres@127.0.0.1:54322/postgres"
     redis_url: str = "redis://127.0.0.1:6379/0"
     sentry_dsn: str = ""
+    expo_access_token: str = ""  # optional; required once "enhanced push security" is on
     log_level: str = "INFO"
 
 

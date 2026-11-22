@@ -34,6 +34,8 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="space/[id]" />
           <Stack.Screen name="transaction/[id]" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="challenge" />
+          <Stack.Screen name="goal" />
         </Stack.Protected>
         <Stack.Protected guard={!session}>
           <Stack.Screen name="(auth)" />

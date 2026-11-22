@@ -113,6 +113,236 @@
         }
       }
     },
+    "/v1/challenges/templates": {
+      "get": {
+        "tags": [
+          "ipon"
+        ],
+        "summary": "List Templates",
+        "operationId": "list_templates_v1_challenges_templates_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ChallengeTemplate"
+                  },
+                  "type": "array",
+                  "title": "Response List Templates V1 Challenges Templates Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/challenges": {
+      "post": {
+        "tags": [
+          "ipon"
+        ],
+        "summary": "Create Challenge",
+        "operationId": "create_challenge_v1_challenges_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChallengeCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Challenge"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/challenges/{challenge_id}/entries": {
+      "post": {
+        "tags": [
+          "ipon"
+        ],
+        "summary": "Add Entry",
+        "operationId": "add_entry_v1_challenges__challenge_id__entries_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "challenge_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Challenge Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EntryCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Entry"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/challenges/{challenge_id}/progress": {
+      "get": {
+        "tags": [
+          "ipon"
+        ],
+        "summary": "Challenge Progress",
+        "operationId": "challenge_progress_v1_challenges__challenge_id__progress_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "challenge_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Challenge Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChallengeProgress"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/goals/{goal_id}/plan": {
+      "post": {
+        "tags": [
+          "ipon"
+        ],
+        "summary": "Goal Plan",
+        "operationId": "goal_plan_v1_goals__goal_id__plan_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "goal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Goal Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GoalPlan"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "tags": [
@@ -141,6 +371,393 @@
   },
   "components": {
     "schemas": {
+      "Challenge": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "space_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Space Id"
+          },
+          "template_key": {
+            "type": "string",
+            "title": "Template Key"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "base_centavos": {
+            "type": "integer",
+            "title": "Base Centavos"
+          },
+          "settings": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Settings"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Start Date"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "space_id",
+          "template_key",
+          "name",
+          "base_centavos",
+          "settings",
+          "start_date",
+          "status"
+        ],
+        "title": "Challenge"
+      },
+      "ChallengeCreate": {
+        "properties": {
+          "space_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Space Id"
+          },
+          "template_key": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Template Key"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "base_centavos": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Centavos"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/ChallengeSettings",
+            "default": {
+              "reverse": false,
+              "leaderboard": false
+            }
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start Date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "space_id",
+          "template_key",
+          "name"
+        ],
+        "title": "ChallengeCreate"
+      },
+      "ChallengeProgress": {
+        "properties": {
+          "challenge": {
+            "$ref": "#/components/schemas/Challenge"
+          },
+          "me": {
+            "$ref": "#/components/schemas/MemberProgress"
+          },
+          "cells": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Cells"
+          },
+          "members": {
+            "items": {
+              "$ref": "#/components/schemas/MemberProgress"
+            },
+            "type": "array",
+            "title": "Members"
+          }
+        },
+        "type": "object",
+        "required": [
+          "challenge",
+          "me",
+          "cells",
+          "members"
+        ],
+        "title": "ChallengeProgress"
+      },
+      "ChallengeSettings": {
+        "properties": {
+          "reverse": {
+            "type": "boolean",
+            "title": "Reverse",
+            "default": false
+          },
+          "target_bills": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Bills"
+          },
+          "target_centavos": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10000000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Centavos"
+          },
+          "leaderboard": {
+            "type": "boolean",
+            "title": "Leaderboard",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ChallengeSettings"
+      },
+      "ChallengeTemplate": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "rules": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Rules"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "name",
+          "description",
+          "rules"
+        ],
+        "title": "ChallengeTemplate"
+      },
+      "Entry": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "cell_index": {
+            "type": "integer",
+            "title": "Cell Index"
+          },
+          "amount_centavos": {
+            "type": "integer",
+            "title": "Amount Centavos"
+          },
+          "saved_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Saved At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "cell_index",
+          "amount_centavos",
+          "saved_at"
+        ],
+        "title": "Entry"
+      },
+      "EntryCreate": {
+        "properties": {
+          "cell_index": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 365.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cell Index"
+          },
+          "bills": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bills"
+          },
+          "amount_centavos": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10000000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Centavos"
+          }
+        },
+        "type": "object",
+        "title": "EntryCreate",
+        "description": "Grid templates need cell_index; bill_50 needs bills; custom needs amount_centavos."
+      },
+      "GoalPlan": {
+        "properties": {
+          "goal_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Goal Id"
+          },
+          "target_centavos": {
+            "type": "integer",
+            "title": "Target Centavos"
+          },
+          "contributed_centavos": {
+            "type": "integer",
+            "title": "Contributed Centavos"
+          },
+          "remaining_centavos": {
+            "type": "integer",
+            "title": "Remaining Centavos"
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date",
+            "title": "Deadline"
+          },
+          "pay_frequency": {
+            "type": "string",
+            "title": "Pay Frequency"
+          },
+          "periods_left": {
+            "type": "integer",
+            "title": "Periods Left"
+          },
+          "per_period_centavos": {
+            "type": "integer",
+            "title": "Per Period Centavos"
+          },
+          "per_day_centavos": {
+            "type": "integer",
+            "title": "Per Day Centavos"
+          },
+          "per_week_centavos": {
+            "type": "integer",
+            "title": "Per Week Centavos"
+          },
+          "per_payday_centavos": {
+            "type": "integer",
+            "title": "Per Payday Centavos"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "on_track",
+              "behind",
+              "done"
+            ],
+            "title": "Status"
+          },
+          "projected_finish": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projected Finish"
+          }
+        },
+        "type": "object",
+        "required": [
+          "goal_id",
+          "target_centavos",
+          "contributed_centavos",
+          "remaining_centavos",
+          "deadline",
+          "pay_frequency",
+          "periods_left",
+          "per_period_centavos",
+          "per_day_centavos",
+          "per_week_centavos",
+          "per_payday_centavos",
+          "status",
+          "projected_finish"
+        ],
+        "title": "GoalPlan"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -245,6 +862,83 @@
         },
         "type": "object",
         "title": "InviteCreate"
+      },
+      "MemberProgress": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "saved_centavos": {
+            "type": "integer",
+            "title": "Saved Centavos"
+          },
+          "target_centavos": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Centavos"
+          },
+          "cells_done": {
+            "type": "integer",
+            "title": "Cells Done"
+          },
+          "total_cells": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Cells"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "streak": {
+            "type": "integer",
+            "title": "Streak"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "display_name",
+          "saved_centavos",
+          "target_centavos",
+          "cells_done",
+          "total_cells",
+          "percent",
+          "streak"
+        ],
+        "title": "MemberProgress"
       },
       "ValidationError": {
         "properties": {

@@ -27,7 +27,9 @@ npm start
   - Saving or deleting a transaction updates the list optimistically right away.
   - If you're offline, the change pauses and is kept across app restarts. It replays once the network returns, because the mutation logic is registered as defaults (`registerTransactionMutations`).
   - New transactions get their id on the device, so a retried save can never create a duplicate.
-- **Realtime:** the tab layout subscribes to `transactions` for the active space, so other members' changes refresh the lists live.
+- **Realtime:** the tab layout subscribes to `transactions`, `challenge_entries` and `goal_contributions` for the active space, so other members' changes refresh lists, grids and goals live.
+- **Ipon:** challenge amounts come from the backend (`/v1/challenges/...`); `src/features/ipon/grid.ts` only labels cells. Ticking a cell shows right away and rolls back if the request fails. Ticking needs a connection.
+- **Push:** after sign-in the app asks for notification permission and saves the Expo push token to your profile. This needs an EAS project id (`extra.eas.projectId`, set by `eas init`); without one, push is skipped and reminders only appear in the in-app inbox. Signing out clears the token.
 - **Spaces:**
   - The header switcher sets the active space, which is persisted in Zustand.
   - The home screen rolls up this month's totals across every space you belong to.

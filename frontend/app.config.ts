@@ -28,6 +28,7 @@ const config: ExpoConfig = {
     'expo-router',
     'expo-localization',
     'expo-secure-store',
+    ['expo-notifications', { color: '#0F9D58' }],
     [
       'expo-image-picker',
       { photosPermission: 'PondoPal needs your photos to attach receipts.', cameraPermission: false },

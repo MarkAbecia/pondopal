@@ -6,6 +6,7 @@ This is the FastAPI service. Python 3.12+, managed with uv.
 cp .env.example .env
 uv sync
 uv run uvicorn app.main:app --reload    # http://127.0.0.1:8000/docs
+uv run python -m app.worker             # scheduled reminders; run exactly one
 ```
 
 Checks run through `misc/ci/backend.sh`, which runs:
@@ -23,7 +24,7 @@ Layout, filled in from Phase 3 onward:
 - `services/`
 - `repositories/`
 - `schemas/`
-- `jobs/`
-- `integrations/`
+- `jobs.py` (scheduled reminders) and `worker.py` (the APScheduler process that runs them)
+- `integrations/` (Expo Push)
 
 User requests query Postgres **under RLS** as `authenticated` (see `misc/docs/adr/0004-rls-first.md`).

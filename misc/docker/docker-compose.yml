@@ -23,3 +23,13 @@ services:
       redis:
         condition: service_healthy
     profiles: ["full"]
+
+  # Scheduled jobs (bill reminders, streak nudges, paluwagan alerts). Exactly one replica.
+  worker:
+    build: ../../backend
+    command: ["python", "-m", "app.worker"]
+    env_file: ../../backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@host.docker.internal:54322/postgres
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    profiles: ["full"]

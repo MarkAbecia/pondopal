@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Text } from 'react-native';
 
 import { Button, Card, Muted, Screen } from '@/components/ui';
+import { unregisterPush } from '@/features/notifications/push';
 import { supabase } from '@/lib/supabase';
 import { useSession } from '@/stores/session';
 
@@ -16,7 +17,10 @@ export default function Profile() {
         <Text className="text-base font-semibold text-gray-900">{name ?? '—'}</Text>
         <Muted>{user?.email ?? user?.phone ?? ''}</Muted>
       </Card>
-      <Button label={t('auth.signOut')} variant="danger" onPress={() => void supabase.auth.signOut()} />
+      <Button label={t('auth.signOut')} variant="danger" onPress={async () => {
+          if (user) await unregisterPush(user.id).catch(() => undefined);
+          await supabase.auth.signOut();
+        }} />
     </Screen>
   );
 }
