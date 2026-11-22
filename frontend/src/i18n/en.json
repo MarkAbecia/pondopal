@@ -1,0 +1,96 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "retry": "Try again",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "offlineQueued": "Saved offline. It will sync when you're back online.",
+    "loadMore": "Load more"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Your name",
+    "noAccount": "New to PondoPal? Create an account",
+    "haveAccount": "Already have an account? Sign in",
+    "withGoogle": "Continue with Google",
+    "withApple": "Continue with Apple",
+    "withPhone": "Use phone number",
+    "phone": "Mobile number",
+    "sendCode": "Send code",
+    "code": "6-digit code",
+    "verify": "Verify",
+    "checkEmail": "Check your email to confirm your account, then sign in.",
+    "signOut": "Sign out",
+    "invalidEmail": "Enter a valid email",
+    "passwordTooShort": "Use at least 8 characters",
+    "invalidPhone": "Enter a PH mobile number like 0917 123 4567",
+    "invalidCode": "Enter the 6-digit code"
+  },
+  "tabs": {
+    "home": "Home",
+    "transactions": "Transactions",
+    "ipon": "Ipon",
+    "spaces": "Spaces",
+    "profile": "Profile"
+  },
+  "home": {
+    "thisMonth": "This month",
+    "allSpaces": "All spaces",
+    "income": "Income",
+    "expense": "Expenses",
+    "net": "Net"
+  },
+  "spaces": {
+    "switch": "Switch space, current: {{name}}",
+    "create": "New space",
+    "name": "Space name",
+    "type": "Type",
+    "types": { "personal": "Personal", "partner": "Partner", "family": "Family", "group": "Group" },
+    "roles": { "owner": "Owner", "admin": "Admin", "member": "Member", "viewer": "View only" },
+    "join": "Join with code",
+    "inviteCode": "Invite code",
+    "joined": "You joined the space",
+    "members": "Members",
+    "invite": "Invite someone",
+    "inviteRole": "They join as",
+    "shareInvite": "Join my PondoPal space \"{{name}}\" with code {{code}}",
+    "remove": "Remove",
+    "leave": "Leave space",
+    "budgets": "Budgets",
+    "bills": "Bills (coming soon)"
+  },
+  "transactions": {
+    "add": "Add transaction",
+    "edit": "Edit transaction",
+    "empty": "No transactions yet. Add your first one!",
+    "income": "Income",
+    "expense": "Expense",
+    "amount": "Amount (₱)",
+    "category": "Category",
+    "source": "Paid with",
+    "date": "Date (YYYY-MM-DD)",
+    "note": "Note",
+    "receipt": "Attach receipt",
+    "receiptAttached": "Receipt attached",
+    "invalidAmount": "Enter an amount like 150 or 1,234.50",
+    "invalidDate": "Use YYYY-MM-DD",
+    "deleteConfirm": "Delete this transaction?"
+  },
+  "budgets": {
+    "safeToSpend": "Safe to spend",
+    "perDay": "{{amount}} a day for {{days}} days",
+    "overBudget": "Over budget by {{amount}}",
+    "spentOf": "{{spent}} of {{limit}}",
+    "setLimit": "Set monthly limit",
+    "limit": "Monthly limit (₱)",
+    "empty": "No budgets yet. Set a limit for a category."
+  },
+  "ipon": {
+    "comingSoon": "Ipon challenges and goals arrive in the next update."
+  }
+}

@@ -1,7 +1,7 @@
 -- RLS behaviour. Users: alice (owner of group space G), bob (member), carol (viewer), dave (outsider).
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(24);
+select plan(25);
 
 insert into auth.users (id, email, raw_user_meta_data) values
   ('a0000000-0000-4000-8000-000000000001', 'alice@test.local', '{"full_name": "Alice"}'),
@@ -36,6 +36,8 @@ select is((select count(*)::int from public.spaces s join public.space_members m
           1, 'signup creates a personal space owned by the user');
 select is((select display_name from public.profiles where user_id = 'a0000000-0000-4000-8000-000000000001'),
           'Alice', 'signup creates a profile from metadata');
+select is((select count(*)::int from public.payment_sources where user_id = 'a0000000-0000-4000-8000-000000000001'),
+          6, 'signup creates the six default payment sources');
 
 -- ---------------------------------------------------------------- dave: outsider
 select pg_temp.login('d0000000-0000-4000-8000-000000000004');

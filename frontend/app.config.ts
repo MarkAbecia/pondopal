@@ -26,6 +26,12 @@ const config: ExpoConfig = {
   },
   plugins: [
     'expo-router',
+    'expo-localization',
+    'expo-secure-store',
+    [
+      'expo-image-picker',
+      { photosPermission: 'PondoPal needs your photos to attach receipts.', cameraPermission: false },
+    ],
     [
       'expo-splash-screen',
       {

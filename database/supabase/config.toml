@@ -165,7 +165,8 @@ site_url = "http://127.0.0.1:3000"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["https://127.0.0.1:3000"]
+# pondopal:// is the app scheme; exp:// covers Expo Go during development
+additional_redirect_urls = ["https://127.0.0.1:3000", "pondopal://auth/callback", "exp://**"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # JWT issuer URL. If not set, defaults to auth.external_url.
@@ -266,7 +267,7 @@ otp_expiry = 3600
 [auth.sms]
 # Allow/disallow the phone provider. When false, users can't sign up or sign in with SMS.
 # To block new signups only, set enable_signup = false under [auth] instead.
-enabled = false
+enabled = true
 # If enabled, users need to confirm their phone number before signing in.
 enable_confirmations = false
 # Template for sending OTP to users
@@ -276,7 +277,9 @@ max_frequency = "5s"
 
 # Use pre-defined map of phone number to OTP for testing.
 # Keys are the phone number with country code and without the + prefix.
-# [auth.sms.test_otp]
+# Local only: this demo number signs in with code 123456 without sending an SMS.
+[auth.sms.test_otp]
+639170000000 = "123456"
 # 14152127777 = "123456"
 
 # Configure logged in session timeouts.
