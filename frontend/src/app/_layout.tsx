@@ -2,10 +2,17 @@ import "../global.css";
 
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
+import {
+  Figtree_700Bold,
+  Figtree_800ExtraBold,
+  useFonts,
+} from "@expo-google-fonts/figtree";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
+
+import { StackHeader } from "@/components/ui";
 
 import { registerTransactionMutations } from "@/features/transactions/api";
 import i18n, { deviceLanguage } from "@/i18n";
@@ -39,6 +46,9 @@ export default function RootLayout() {
   const ready = useSession((s) => s.ready);
   const language = useSettings((s) => s.language);
   const scheme = useScheme();
+  // a font that fails to load falls back to the system face; never block the app on it
+  const [fontsLoaded, fontError] = useFonts({ Figtree_700Bold, Figtree_800ExtraBold });
+  const fontsDone = fontsLoaded || !!fontError;
 
   useEffect(() => {
     void i18n.changeLanguage(
@@ -47,21 +57,27 @@ export default function RootLayout() {
   }, [language]);
 
   useEffect(() => {
-    if (ready) void SplashScreen.hideAsync();
-  }, [ready]);
+    if (ready && fontsDone) void SplashScreen.hideAsync();
+  }, [ready, fontsDone]);
 
-  if (!ready) return null;
+  if (!ready || !fontsDone) return null;
 
   return (
     <PersistQueryClientProvider
       client={queryClient}
-      persistOptions={{ persister, maxAge: 24 * 60 * 60 * 1000, buster: "v1" }}
+      persistOptions={{ persister, maxAge: 24 * 60 * 60 * 1000, buster: "v2" }}
       onSuccess={() => queryClient.resumePausedMutations()}
     >
       <View style={[{ flex: 1 }, themeVars[scheme]]}>
-        <StatusBar style="auto" />
+        {/* every screen opens on the violet gradient */}
+        <StatusBar style="light" />
         <ThemeProvider value={navTheme(scheme)}>
-          <Stack screenOptions={{ headerShown: false }}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              header: (props) => <StackHeader {...props} />,
+            }}
+          >
             <Stack.Protected guard={!!session}>
               <Stack.Screen name="(tabs)" />
               <Stack.Screen name="space/[id]" />
@@ -71,7 +87,7 @@ export default function RootLayout() {
               />
               <Stack.Screen name="challenge" />
               <Stack.Screen name="goal" />
-            <Stack.Screen name="paluwagan" />
+              <Stack.Screen name="paluwagan" />
             </Stack.Protected>
             <Stack.Protected guard={!session}>
               <Stack.Screen name="(auth)" />

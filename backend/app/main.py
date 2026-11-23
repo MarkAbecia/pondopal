@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 import redis.asyncio as redis
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1 import router as v1_router
 from app.core.config import Settings, get_settings
@@ -32,6 +33,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.settings = settings
     app.state.verifier = TokenVerifier(settings.supabase_jwks_url, settings.supabase_jwt_secret)
     app.middleware("http")(request_context)
+    # added last so it runs first and answers preflights before anything else
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origins,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     install_error_handlers(app)
     app.include_router(v1_router)
 

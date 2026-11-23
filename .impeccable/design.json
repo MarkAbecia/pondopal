@@ -1,0 +1,958 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T04:52:13.412Z",
+  "title": "Design System: PondoPal",
+  "extensions": {
+    "colorMeta": {
+      "grad-from": {
+        "role": "primary",
+        "displayName": "Grad From",
+        "canonical": "#7C3AED",
+        "tonalRamp": [
+          "#0F002A",
+          "#2D0063",
+          "#4E02A3",
+          "#6F25DC",
+          "#8D57FE",
+          "#AA8FFE",
+          "#CBBFFE",
+          "#EFECFE"
+        ]
+      },
+      "grad-to": {
+        "role": "primary",
+        "displayName": "Grad To",
+        "canonical": "#4F46E5",
+        "tonalRamp": [
+          "#070031",
+          "#1C0171",
+          "#3406B7",
+          "#4B40DF",
+          "#686BFE",
+          "#8F9BFF",
+          "#BBC5FF",
+          "#EAEEFE"
+        ]
+      },
+      "brand": {
+        "role": "primary",
+        "displayName": "Brand",
+        "canonical": "#4F46E5",
+        "tonalRamp": [
+          "#070031",
+          "#1C0171",
+          "#3406B7",
+          "#4B40DF",
+          "#686BFE",
+          "#8F9BFF",
+          "#BBC5FF",
+          "#EAEEFE"
+        ]
+      },
+      "brand-soft": {
+        "role": "primary",
+        "displayName": "Brand Soft",
+        "canonical": "#EEEDFD",
+        "tonalRamp": [
+          "#0B0A10",
+          "#24242E",
+          "#41404D",
+          "#605F6D",
+          "#81808F",
+          "#A4A3B2",
+          "#C8C8D2",
+          "#EEEEF2"
+        ]
+      },
+      "brand-ink": {
+        "role": "primary",
+        "displayName": "Brand Ink",
+        "canonical": "#3730A3",
+        "tonalRamp": [
+          "#070030",
+          "#1D0170",
+          "#33299C",
+          "#4D4EC3",
+          "#6B72EA",
+          "#8F9AFE",
+          "#BCC5FE",
+          "#EAEDFE"
+        ]
+      },
+      "on-grad-muted": {
+        "role": "primary",
+        "displayName": "On Grad Muted",
+        "canonical": "#EDE9FE",
+        "tonalRamp": [
+          "#0C0A12",
+          "#262331",
+          "#433F50",
+          "#625E70",
+          "#837F92",
+          "#A6A2B5",
+          "#CAC7D4",
+          "#EEEEF2"
+        ]
+      },
+      "glass": {
+        "role": "primary",
+        "displayName": "Glass",
+        "canonical": "rgba(255,255,255,0.16)"
+      },
+      "income": {
+        "role": "secondary",
+        "displayName": "Income",
+        "canonical": "#0B7A5C",
+        "tonalRamp": [
+          "#000F09",
+          "#002D20",
+          "#024F3A",
+          "#007356",
+          "#369676",
+          "#61B999",
+          "#9FD8C1",
+          "#E0F4EB"
+        ]
+      },
+      "income-soft": {
+        "role": "secondary",
+        "displayName": "Income Soft",
+        "canonical": "#E2F5EE",
+        "tonalRamp": [
+          "#060D0A",
+          "#1B2824",
+          "#364641",
+          "#556560",
+          "#768781",
+          "#98AAA3",
+          "#C0CCC8",
+          "#EBF0EE"
+        ]
+      },
+      "expense": {
+        "role": "secondary",
+        "displayName": "Expense",
+        "canonical": "#C8264B",
+        "tonalRamp": [
+          "#1F0004",
+          "#4B0114",
+          "#7F0027",
+          "#B5043C",
+          "#DE3E5C",
+          "#FE7082",
+          "#FEB1B6",
+          "#FFE8E9"
+        ]
+      },
+      "on-expense": {
+        "role": "secondary",
+        "displayName": "On Expense",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "danger-soft": {
+        "role": "secondary",
+        "displayName": "Danger Soft",
+        "canonical": "#FCEBEF",
+        "tonalRamp": [
+          "#0F090B",
+          "#2D2224",
+          "#4B3E41",
+          "#6B5D60",
+          "#8D7E81",
+          "#B0A0A4",
+          "#D1C6C8",
+          "#F1EDEE"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "canonical": "#F4F3FA",
+        "tonalRamp": [
+          "#0B0B0D",
+          "#252429",
+          "#424147",
+          "#616066",
+          "#828188",
+          "#A5A4AA",
+          "#C9C8CD",
+          "#EEEEF0"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Card",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "fg": {
+        "role": "neutral",
+        "displayName": "Fg",
+        "canonical": "#1C1838",
+        "tonalRamp": [
+          "#0A081A",
+          "#23203F",
+          "#403D60",
+          "#5E5C82",
+          "#7F7DA5",
+          "#A2A0C8",
+          "#C7C6E2",
+          "#EDEDF8"
+        ]
+      },
+      "fg-2": {
+        "role": "neutral",
+        "displayName": "Fg 2",
+        "canonical": "#3B3660",
+        "tonalRamp": [
+          "#0B071C",
+          "#241E43",
+          "#403B66",
+          "#5F5B88",
+          "#807CAB",
+          "#A29FCF",
+          "#C7C5E7",
+          "#EDEDF9"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#5F5A80",
+        "tonalRamp": [
+          "#0B0819",
+          "#25203E",
+          "#413C60",
+          "#605B82",
+          "#817DA5",
+          "#A49FC8",
+          "#C8C5E2",
+          "#EEEDF7"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder",
+        "canonical": "#827DA2",
+        "tonalRamp": [
+          "#0B0818",
+          "#25203C",
+          "#423D5E",
+          "#615C7F",
+          "#827DA2",
+          "#A4A0C5",
+          "#C9C5E0",
+          "#EEEDF7"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#DCD9EC",
+        "tonalRamp": [
+          "#0B0A11",
+          "#252330",
+          "#42404F",
+          "#615F6F",
+          "#838091",
+          "#A5A2B4",
+          "#C9C7D4",
+          "#EEEEF2"
+        ]
+      },
+      "line-soft": {
+        "role": "neutral",
+        "displayName": "Line Soft",
+        "canonical": "#ECEAF5",
+        "tonalRamp": [
+          "#0B0A0F",
+          "#25242B",
+          "#424149",
+          "#616069",
+          "#83818B",
+          "#A5A3AD",
+          "#C9C8CF",
+          "#EEEEF0"
+        ]
+      },
+      "shadow": {
+        "role": "neutral",
+        "displayName": "Shadow",
+        "canonical": "#3B2A8C",
+        "tonalRamp": [
+          "#0B002E",
+          "#230866",
+          "#3D2D8F",
+          "#5A4FB4",
+          "#7972DA",
+          "#9B96FE",
+          "#C2C3FE",
+          "#ECEDFE"
+        ]
+      },
+      "dark-grad-from": {
+        "role": "primary",
+        "displayName": "Dark Grad From",
+        "canonical": "#6D28D9",
+        "tonalRamp": [
+          "#0F002A",
+          "#2C0064",
+          "#4D02A4",
+          "#6E29DA",
+          "#8C58FE",
+          "#A990FF",
+          "#CABFFF",
+          "#EEECFE"
+        ],
+        "scheme": "dark"
+      },
+      "dark-grad-to": {
+        "role": "primary",
+        "displayName": "Dark Grad To",
+        "canonical": "#4338CA",
+        "tonalRamp": [
+          "#070031",
+          "#1C0170",
+          "#3317AF",
+          "#4B45D6",
+          "#686BFF",
+          "#8F9BFE",
+          "#BBC5FF",
+          "#EAEDFE"
+        ],
+        "scheme": "dark"
+      },
+      "dark-brand-soft": {
+        "role": "primary",
+        "displayName": "Dark Brand Soft",
+        "canonical": "#28244E",
+        "tonalRamp": [
+          "#0A071D",
+          "#221F45",
+          "#3E3C68",
+          "#5D5B8A",
+          "#7D7CAE",
+          "#A09FD1",
+          "#C5C5E9",
+          "#EDEDFA"
+        ],
+        "scheme": "dark"
+      },
+      "dark-brand-ink": {
+        "role": "primary",
+        "displayName": "Dark Brand Ink",
+        "canonical": "#BEBAFF",
+        "tonalRamp": [
+          "#0B0522",
+          "#241B4E",
+          "#3F3872",
+          "#5E5895",
+          "#7E79B9",
+          "#A09CDD",
+          "#C5C4F1",
+          "#EDEDFD"
+        ],
+        "scheme": "dark"
+      },
+      "dark-glass": {
+        "role": "primary",
+        "displayName": "Dark Glass",
+        "canonical": "rgba(255,255,255,0.14)",
+        "scheme": "dark"
+      },
+      "dark-income": {
+        "role": "secondary",
+        "displayName": "Dark Income",
+        "canonical": "#3DD6A5",
+        "tonalRamp": [
+          "#000F08",
+          "#012D1F",
+          "#024F39",
+          "#017355",
+          "#0A9972",
+          "#27C092",
+          "#89DDBC",
+          "#DBF6EA"
+        ],
+        "scheme": "dark"
+      },
+      "dark-income-soft": {
+        "role": "secondary",
+        "displayName": "Dark Income Soft",
+        "canonical": "#123A2E",
+        "tonalRamp": [
+          "#000F09",
+          "#062C22",
+          "#244B3E",
+          "#436B5D",
+          "#648C7E",
+          "#87AFA0",
+          "#B5D0C6",
+          "#E7F1ED"
+        ],
+        "scheme": "dark"
+      },
+      "dark-expense": {
+        "role": "secondary",
+        "displayName": "Dark Expense",
+        "canonical": "#FF7D96",
+        "tonalRamp": [
+          "#1E0006",
+          "#4B0119",
+          "#7E0030",
+          "#A72C4D",
+          "#CE516D",
+          "#F47890",
+          "#FFB0BC",
+          "#FEE8EB"
+        ],
+        "scheme": "dark"
+      },
+      "dark-on-expense": {
+        "role": "secondary",
+        "displayName": "Dark On Expense",
+        "canonical": "#0F0D1C",
+        "tonalRamp": [
+          "#0B0A13",
+          "#242332",
+          "#414052",
+          "#605F72",
+          "#818094",
+          "#A4A2B7",
+          "#C8C7D6",
+          "#EEEEF3"
+        ],
+        "scheme": "dark"
+      },
+      "dark-danger-soft": {
+        "role": "secondary",
+        "displayName": "Dark Danger Soft",
+        "canonical": "#3D1626",
+        "tonalRamp": [
+          "#17040B",
+          "#3B1726",
+          "#5D3343",
+          "#7F5262",
+          "#A27283",
+          "#C695A6",
+          "#E1BECA",
+          "#F7EBEF"
+        ],
+        "scheme": "dark"
+      },
+      "dark-canvas": {
+        "role": "neutral",
+        "displayName": "Dark Canvas",
+        "canonical": "#0F0D1C",
+        "tonalRamp": [
+          "#0B0A13",
+          "#242332",
+          "#414052",
+          "#605F72",
+          "#818094",
+          "#A4A2B7",
+          "#C8C7D6",
+          "#EEEEF3"
+        ],
+        "scheme": "dark"
+      },
+      "dark-card": {
+        "role": "neutral",
+        "displayName": "Dark Card",
+        "canonical": "#1B1830",
+        "tonalRamp": [
+          "#0B0916",
+          "#242239",
+          "#403E59",
+          "#5F5D7A",
+          "#807E9D",
+          "#A3A1C0",
+          "#C8C7DC",
+          "#EEEDF5"
+        ],
+        "scheme": "dark"
+      },
+      "dark-fg": {
+        "role": "neutral",
+        "displayName": "Dark Fg",
+        "canonical": "#F2F0FB",
+        "tonalRamp": [
+          "#0B0A0F",
+          "#25242B",
+          "#424149",
+          "#616069",
+          "#83818B",
+          "#A5A3AD",
+          "#C9C8CF",
+          "#EEEEF0"
+        ],
+        "scheme": "dark"
+      },
+      "dark-fg-2": {
+        "role": "neutral",
+        "displayName": "Dark Fg 2",
+        "canonical": "#D3CFEA",
+        "tonalRamp": [
+          "#0B0914",
+          "#252235",
+          "#423E54",
+          "#615E75",
+          "#827F97",
+          "#A5A1BA",
+          "#C9C7D8",
+          "#EEEDF4"
+        ],
+        "scheme": "dark"
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Muted",
+        "canonical": "#A6A1C6",
+        "tonalRamp": [
+          "#0B0818",
+          "#25203B",
+          "#423D5C",
+          "#615C7E",
+          "#827DA0",
+          "#A5A0C4",
+          "#C9C6DF",
+          "#EEEDF6"
+        ],
+        "scheme": "dark"
+      },
+      "dark-placeholder": {
+        "role": "neutral",
+        "displayName": "Dark Placeholder",
+        "canonical": "#8E89B0",
+        "tonalRamp": [
+          "#0B0819",
+          "#25203D",
+          "#423C5F",
+          "#615C80",
+          "#827DA3",
+          "#A4A0C6",
+          "#C8C5E1",
+          "#EEEDF7"
+        ],
+        "scheme": "dark"
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Dark Line",
+        "canonical": "#3A3558",
+        "tonalRamp": [
+          "#0B0819",
+          "#25203E",
+          "#413C60",
+          "#605C82",
+          "#817DA5",
+          "#A4A0C8",
+          "#C8C5E2",
+          "#EEEDF7"
+        ],
+        "scheme": "dark"
+      },
+      "dark-line-soft": {
+        "role": "neutral",
+        "displayName": "Dark Line Soft",
+        "canonical": "#2A2642",
+        "tonalRamp": [
+          "#0B0917",
+          "#25213A",
+          "#413D5B",
+          "#605D7D",
+          "#817E9F",
+          "#A4A1C2",
+          "#C8C6DE",
+          "#EEEDF6"
+        ],
+        "scheme": "dark"
+      },
+      "dark-shadow": {
+        "role": "neutral",
+        "displayName": "Dark Shadow",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ],
+        "scheme": "dark"
+      },
+      "category-coral": {
+        "role": "tertiary",
+        "displayName": "Category Coral",
+        "canonical": "#E5486A",
+        "tonalRamp": [
+          "#1E0005",
+          "#4B0117",
+          "#7E002C",
+          "#B40943",
+          "#DC3F63",
+          "#FF6E87",
+          "#FEB1B9",
+          "#FEE8EA"
+        ]
+      },
+      "category-sky": {
+        "role": "tertiary",
+        "displayName": "Category Sky",
+        "canonical": "#2B8BE0",
+        "tonalRamp": [
+          "#000C1C",
+          "#002647",
+          "#004378",
+          "#0163AC",
+          "#2486DA",
+          "#52AAFE",
+          "#A0CEFE",
+          "#E3F0FE"
+        ]
+      },
+      "category-orange": {
+        "role": "tertiary",
+        "displayName": "Category Orange",
+        "canonical": "#E8711A",
+        "tonalRamp": [
+          "#180500",
+          "#3F1800",
+          "#6A2E01",
+          "#994603",
+          "#CB5F06",
+          "#F58136",
+          "#FEB68F",
+          "#FFEADF"
+        ]
+      },
+      "category-violet": {
+        "role": "tertiary",
+        "displayName": "Category Violet",
+        "canonical": "#8B5CF6",
+        "tonalRamp": [
+          "#0F002A",
+          "#2C0163",
+          "#4E00A4",
+          "#6C35CF",
+          "#8B5DF7",
+          "#A98FFF",
+          "#CABFFE",
+          "#EFECFF"
+        ]
+      },
+      "category-emerald": {
+        "role": "tertiary",
+        "displayName": "Category Emerald",
+        "canonical": "#0E9F76",
+        "tonalRamp": [
+          "#000F08",
+          "#012D1F",
+          "#044F39",
+          "#057354",
+          "#059971",
+          "#48BD94",
+          "#93DBBD",
+          "#DDF5EA"
+        ]
+      },
+      "category-amber": {
+        "role": "tertiary",
+        "displayName": "Category Amber",
+        "canonical": "#B07800",
+        "tonalRamp": [
+          "#120900",
+          "#342101",
+          "#5A3B01",
+          "#825801",
+          "#AD7602",
+          "#D1993F",
+          "#E9C28A",
+          "#FAECD9"
+        ]
+      },
+      "category-pink": {
+        "role": "tertiary",
+        "displayName": "Category Pink",
+        "canonical": "#D9469F",
+        "tonalRamp": [
+          "#1C0010",
+          "#47002F",
+          "#770151",
+          "#AA0B76",
+          "#D23F99",
+          "#F869BC",
+          "#FFABD7",
+          "#FFE7F2"
+        ]
+      },
+      "category-blue": {
+        "role": "tertiary",
+        "displayName": "Category Blue",
+        "canonical": "#3B63F0",
+        "tonalRamp": [
+          "#020034",
+          "#080079",
+          "#1423B2",
+          "#2B4DD9",
+          "#4974FE",
+          "#7CA1FE",
+          "#B1C8FF",
+          "#E7EEFF"
+        ]
+      },
+      "category-teal": {
+        "role": "tertiary",
+        "displayName": "Category Teal",
+        "canonical": "#0B9C9A",
+        "tonalRamp": [
+          "#000E0E",
+          "#012C2B",
+          "#034C4B",
+          "#02706E",
+          "#019594",
+          "#46B9B7",
+          "#93D8D6",
+          "#DDF4F3"
+        ]
+      },
+      "category-clay": {
+        "role": "tertiary",
+        "displayName": "Category Clay",
+        "canonical": "#B5532F",
+        "tonalRamp": [
+          "#1B0300",
+          "#441201",
+          "#732400",
+          "#9F3F19",
+          "#C5623E",
+          "#EA8663",
+          "#FDB69D",
+          "#FFE9E2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "BigMoney peso figures on the gradient stage; centavos at 50% size. 30-32px on canvas cards."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "HeaderStat amounts and the Donut centre total (FIGURE style)."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "HeaderTitle on the stage."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings on canvas and the StackHeader title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Row titles, inputs, button labels."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Notes, field labels, legends."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Tile captions, PillBar amounts, header stat labels."
+      },
+      "tab-label": {
+        "displayName": "Tab Label",
+        "purpose": "Bottom tab bar labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-lift",
+        "value": "0 8px 18px rgba(59,42,140,0.07)",
+        "purpose": "Cards and budget rail cards (lift strength 1, Android elevation 2). Black in dark mode."
+      },
+      {
+        "name": "bar-lift",
+        "value": "0 8px 18px rgba(59,42,140,0.14)",
+        "purpose": "Tab bar (strength 2, elevation 4)."
+      },
+      {
+        "name": "float-lift",
+        "value": "0 8px 18px rgba(59,42,140,0.21)",
+        "purpose": "FAB (strength 3, elevation 6)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "press-opacity",
+        "value": "active:opacity-70 / 80 / 85",
+        "purpose": "Instant press feedback on every Pressable; no animated transitions are defined."
+      }
+    ],
+    "breakpoints": [],
+    "platformNotes": "React Native (Expo SDK 58, NativeWind v4), Android and iOS. Review captures are react-native-web at 375x812 only; native rendering is uncaptured. Icons are Ionicons glyphs; the SVGs below are stand-ins for the panel."
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action on a form.",
+      "html": "<button class=\"ds-btn-primary\">Save</button>",
+      "css": ".ds-btn-primary{background:#4F46E5;color:#fff;min-height:48px;padding:12px 20px;border:none;border-radius:9999px;font:600 16px system-ui,sans-serif;cursor:pointer}.ds-btn-primary:active{opacity:.8}.ds-btn-primary:focus-visible{outline:3px solid #4F46E5;outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Lesser action, retry.",
+      "html": "<button class=\"ds-btn-secondary\">Retry</button>",
+      "css": ".ds-btn-secondary{background:#EEEDFD;color:#3730A3;min-height:48px;padding:12px 20px;border:none;border-radius:9999px;font:600 16px system-ui,sans-serif;cursor:pointer}.ds-btn-secondary:active{opacity:.8}.ds-btn-secondary:focus-visible{outline:3px solid #4F46E5;outline-offset:2px}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Destructive action.",
+      "html": "<button class=\"ds-btn-danger\">Delete</button>",
+      "css": ".ds-btn-danger{background:#FCEBEF;color:#C8264B;min-height:48px;padding:12px 20px;border:none;border-radius:9999px;font:600 16px system-ui,sans-serif;cursor:pointer}.ds-btn-danger:active{opacity:.8}.ds-btn-danger:focus-visible{outline:3px solid #4F46E5;outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "Labelled input; brand border on focus, expense on error.",
+      "html": "<label class=\"ds-field\"><span>Amount</span><input placeholder=\"0.00\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;font:500 14px system-ui,sans-serif;color:#3B3660;width:280px}.ds-field input{min-height:48px;padding:0 16px;border:2px solid #ECEAF5;border-radius:16px;background:#fff;color:#1C1838;font:400 16px system-ui,sans-serif}.ds-field input::placeholder{color:#827DA2}.ds-field input:focus-visible{outline:none;border-color:#4F46E5}"
+    },
+    {
+      "name": "Segmented",
+      "kind": "chip",
+      "refersTo": "segmented",
+      "description": "Expense / Income switch.",
+      "html": "<div class=\"ds-seg\"><button class=\"on\">Expense</button><button>Income</button></div>",
+      "css": ".ds-seg{display:flex;padding:4px;border:2px solid #4F46E5;border-radius:9999px;background:#fff;width:280px}.ds-seg button{flex:1;min-height:44px;border:none;border-radius:9999px;background:transparent;color:#3730A3;font:600 14px system-ui,sans-serif;cursor:pointer}.ds-seg button.on{background:#4F46E5;color:#fff}.ds-seg button:active{opacity:.7}.ds-seg button:focus-visible{outline:3px solid #4F46E5;outline-offset:2px}"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Borderless white container with violet lift.",
+      "html": "<div class=\"ds-card\"><strong>Partner space</strong><span>₱19,474.50</span></div>",
+      "css": ".ds-card{display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:24px;background:#fff;box-shadow:0 8px 18px rgba(59,42,140,.07);width:280px}.ds-card strong{font:700 18px system-ui,sans-serif;color:#1C1838}.ds-card span{font:800 30px Figtree,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:#1C1838}"
+    },
+    {
+      "name": "Gradient Header",
+      "kind": "custom",
+      "refersTo": "header-stat",
+      "description": "The violet stage: note, BigMoney with small centavos, two glass stats.",
+      "html": "<div class=\"ds-stage\"><span class=\"ds-note\">This month</span><div class=\"ds-big\">₱19,474<small>.50</small></div><div class=\"ds-stats\"><div class=\"ds-stat\"><span>Income</span><b>₱42,000.00</b></div><div class=\"ds-stat\"><span>Expense</span><b>₱22,525.50</b></div></div></div>",
+      "css": ".ds-stage{background:linear-gradient(135deg,#7C3AED,#4F46E5);padding:16px 20px 28px;width:335px;font-family:system-ui,sans-serif}.ds-note{color:#EDE9FE;font-size:14px}.ds-big{color:#fff;font:800 40px/1.15 Figtree,system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-big small{font-size:20px}.ds-stats{display:flex;gap:12px;margin-top:20px}.ds-stat{flex:1;display:flex;flex-direction:column;padding:12px;border-radius:16px;background:rgba(255,255,255,.16)}.ds-stat span{color:#EDE9FE;font-size:12px}.ds-stat b{color:#fff;font:700 16px Figtree,system-ui,sans-serif;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "PillBar",
+      "kind": "custom",
+      "refersTo": "pill-bar",
+      "description": "Thick pill progress with the amount inside the fill and the limit at the end.",
+      "html": "<div class=\"ds-pill\" role=\"progressbar\" aria-valuenow=\"64\"><div class=\"ds-fill\"></div><span class=\"ds-in\">₱3,200.00</span><span class=\"ds-max\">₱5,000.00</span></div>",
+      "css": ".ds-pill{position:relative;display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 12px;border-radius:9999px;background:#ECEAF5;overflow:hidden;width:280px;font:700 12px system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-fill{position:absolute;left:0;top:0;bottom:0;width:64%;border-radius:9999px;background:#4F46E5}.ds-in{position:relative;color:#fff}.ds-max{position:relative;color:#5F5A80;font-weight:600}"
+    },
+    {
+      "name": "Category Tile",
+      "kind": "custom",
+      "refersTo": "category-tile",
+      "description": "Rounded-square category icon, solid or 14% tint of its hashed hue.",
+      "html": "<div class=\"ds-tiles\"><span class=\"ds-tile solid\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\"><path fill=\"currentColor\" d=\"M3 6h18l-2 11H5zM8 3h8v2H8z\"/></svg></span><span class=\"ds-tile tint\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\"><path fill=\"currentColor\" d=\"M3 6h18l-2 11H5zM8 3h8v2H8z\"/></svg></span></div>",
+      "css": ".ds-tiles{display:flex;gap:12px}.ds-tile{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:16px}.ds-tile.solid{background:#E5486A;color:#fff}.ds-tile.tint{background:#E5486A24;color:#E5486A}"
+    },
+    {
+      "name": "Tab Bar",
+      "kind": "nav",
+      "refersTo": "tab-bar",
+      "description": "White bottom bar; filled indigo-ink icon when active.",
+      "html": "<nav class=\"ds-tabs\"><a class=\"on\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"currentColor\" d=\"M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z\"/></svg>Home</a><a href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4\"/></svg>Transactions</a></nav>",
+      "css": ".ds-tabs{display:flex;background:#fff;height:68px;padding-top:6px;box-shadow:0 8px 18px rgba(59,42,140,.14);width:335px}.ds-tabs a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;color:#5F5A80;font:600 11px system-ui,sans-serif;text-decoration:none}.ds-tabs a.on{color:#3730A3}.ds-tabs a:active{opacity:.7}.ds-tabs a:focus-visible{outline:3px solid #4F46E5;outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Violet Stage",
+    "overview": "Every tab opens on a violet-to-indigo gradient header that holds the one peso figure that matters, set large in Figtree with its centavos at half size. Below the stage, the work sits on a lavender-tinted canvas in white rounded cards lifted by a soft violet shadow, never outlined. Colour carries meaning: indigo for action and the active state, teal-green for income, coral-red for expense, and a hashed per-category hue on every category tile.\n\nOne design ships to Android and iOS through Expo (React Native + NativeWind v4); light and dark follow the phone. All values below are read from `frontend/src/lib/theme.ts`, `frontend/tailwind.config.js`, `frontend/src/global.css` and `frontend/src/components/ui/index.tsx`. Review captures exist only for react-native-web at 375x812 (`.impeccable/review/`); no native captures exist, so native shadow, elevation and font-fallback rendering are unverified. The gradient header is the user's explicit choice (recorded 2026-11-23). There are no shipping raster assets; every icon is an Ionicons glyph.",
+    "keyCharacteristics": [
+      "Gradient stage header on every tab and pushed screen; content below on canvas.",
+      "Borderless white cards (24px corners) with a soft violet lift.",
+      "Peso figures in Figtree 800/700 with tabular numerals; small centavos on display figures.",
+      "Pills everywhere a control or progress needs a shape: buttons, segmented, chips, progress, FAB.",
+      "Category identity by colour: rounded-square tiles, solid or softly tinted."
+    ],
+    "rules": [
+      {
+        "name": "The Stage-Only Gradient Rule",
+        "body": "The gradient appears only behind headers (and the pinned status-bar scrim). Content surfaces are flat canvas and card colours.",
+        "section": "colors"
+      },
+      {
+        "name": "The Money Has a Colour Rule",
+        "body": "Income is always `income` with a `+`, expense always `expense` with a `-`; neutral totals stay `fg`. Use `Money` or `BigMoney`, never colour a peso figure by hand.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token-Only Rule",
+        "body": "Classes read colours through CSS variables (`bg-card`, `text-fg`, `bg-brand-light`, `text-brand-dark`); props that need a raw value read `usePalette()`. No hex literals in screens, except `#FFFFFF` on brand or gradient.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Money Rule",
+        "body": "Every peso figure uses tabular numerals (`DISPLAY`, `FIGURE`, or the `tabular-nums` variant in `Money`/`PillBar`) so columns line up.",
+        "section": "typography"
+      },
+      {
+        "name": "The Scales-With-The-Phone Rule",
+        "body": "Text follows the system font size. Cap scaling (`maxFontSizeMultiplier`) only inside fixed-size cells, and put the full value in the accessibility label.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Border Card Rule",
+        "body": "Cards separate from the canvas by colour and lift, never by an outline. Borders belong to inputs, chips, dashed Empty states and in-card row dividers.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** start a new screen with `Screen` and a header built from `GradientHeader` (tabs) or `StackHeader` (pushed routes); put content in `Card`s on the canvas.",
+      "**Do** show peso amounts with `BigMoney`, `Money` or `FIGURE`, so they keep tabular numerals and income/expense colouring.",
+      "**Do** take colours from tailwind tokens or `usePalette()`, and check the screen in both light and dark.",
+      "**Do** give every control `accessibilityRole` and label, a 48px minimum target, and an `active:` press class.",
+      "**Do** colour categories with `categoryColor(name)` through `CategoryTile`, never a hand-picked hue.",
+      "**Do** keep one primary action per screen; when it is \"add\", it is the FAB."
+    ],
+    "donts": [
+      "**Don't** put the gradient on cards, buttons or the canvas; it is the stage only.",
+      "**Don't** outline cards or add a second shadow style; use `lift`.",
+      "**Don't** use square or small-radius corners on controls; controls are pills, containers 16-24px.",
+      "**Don't** set money in the system face or with proportional digits.",
+      "**Don't** use `dark:` classes; dark values come from the CSS variables set at the root (`darkMode: 'class'` is only there to keep NativeWind web from crashing)."
+    ]
+  }
+}

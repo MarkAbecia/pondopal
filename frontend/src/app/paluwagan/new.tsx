@@ -79,7 +79,7 @@ export default function NewPaluwagan() {
             accessibilityLabel={pos ? t('paluwagan.turnOf', { n: pos, name: m.name ?? '—' }) : (m.name ?? '—')}
             accessibilityState={{ checked: pos > 0 }}
             onPress={() => toggle(m.userId)}
-            className={`min-h-11 flex-row items-center gap-3 rounded-xl border px-3 ${pos ? 'border-brand bg-brand-light' : 'border-line bg-card'}`}>
+            className={`active:opacity-70 min-h-11 flex-row items-center gap-3 rounded-xl border px-3 ${pos ? 'border-brand bg-brand-light' : 'border-line bg-card'}`}>
             <View className={`h-7 w-7 items-center justify-center rounded-full ${pos ? 'bg-brand' : 'bg-line-soft'}`}>
               <Text className={pos ? 'font-bold text-white' : 'text-muted'}>{pos || ''}</Text>
             </View>

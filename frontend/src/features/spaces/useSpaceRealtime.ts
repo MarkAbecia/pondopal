@@ -24,8 +24,10 @@ export function useSpaceRealtime(spaceId: string | undefined) {
       void qc.invalidateQueries({ queryKey: ['paluwagan'] });
     };
     // RLS applies to Realtime too: only rows this user can read are delivered.
+    // Unique topic per run: supabase.channel() returns an existing channel of the same name, and the
+    // previous run's channel may still be subscribed (removeChannel is async; dev runs effects twice).
     const channel = supabase
-      .channel(`space:${spaceId}`)
+      .channel(`space:${spaceId}:${Math.random().toString(36).slice(2)}`)
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'transactions', filter: `space_id=eq.${spaceId}` },

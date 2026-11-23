@@ -1,4 +1,4 @@
-import { type Palette, palette } from './theme';
+import { CATEGORY_COLORS, categoryColor, type Palette, palette } from './theme';
 
 jest.mock('nativewind', () => ({ vars: (v: object) => v }));
 
@@ -17,7 +17,8 @@ function contrast(a: string, b: string): number {
 }
 
 // [text, background] pairs the UI actually uses
-const PAIRS: [keyof Palette | 'white', keyof Palette][] = [
+type Color = Exclude<keyof Palette, 'tileTint'>;
+const PAIRS: [Color | 'white', Color][] = [
   ['fg', 'canvas'],
   ['fg', 'card'],
   ['fg2', 'card'],
@@ -29,6 +30,12 @@ const PAIRS: [keyof Palette | 'white', keyof Palette][] = [
   ['brandInk', 'card'],
   ['brandInk', 'brandSoft'],
   ['white', 'brand'], // primary buttons, ticked grid cells
+  ['white', 'gradFrom'], // header text on the gradient
+  ['white', 'gradTo'],
+  ['onGradMuted', 'gradFrom'], // secondary header text
+  ['onGradMuted', 'gradTo'],
+  ['onExpense', 'expense'], // amounts inside over-budget pill bars
+  ['income', 'incomeSoft'],
 ];
 
 describe.each(['light', 'dark'] as const)('%s theme', (scheme) => {
@@ -39,6 +46,16 @@ describe.each(['light', 'dark'] as const)('%s theme', (scheme) => {
   });
 
   it('placeholder text meets 3:1 on inputs', () => {
+    expect(contrast(p.placeholder, p.canvas)).toBeGreaterThanOrEqual(3);
     expect(contrast(p.placeholder, p.card)).toBeGreaterThanOrEqual(3);
+  });
+});
+
+describe('category colors', () => {
+  it.each(CATEGORY_COLORS)('%s carries a white icon (3:1)', (c) => {
+    expect(contrast('#FFFFFF', c)).toBeGreaterThanOrEqual(3);
+  });
+  it('picks the same color for the same name', () => {
+    expect(categoryColor('Groceries')).toBe(categoryColor('Groceries'));
   });
 });

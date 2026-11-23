@@ -7,7 +7,8 @@
     "loading": "Naglo-load…",
     "error": "May nangyaring mali",
     "offlineQueued": "Na-save offline. Isi-sync ito pagbalik ng internet.",
-    "loadMore": "Ipakita pa"
+    "loadMore": "Ipakita pa",
+    "back": "Bumalik"
   },
   "auth": {
     "signIn": "Mag-sign in",
@@ -43,7 +44,19 @@
     "allSpaces": "Lahat ng space",
     "income": "Kita",
     "expense": "Gastos",
-    "net": "Natira"
+    "net": "Natira",
+    "topExpense": "Pinakamalaking gastos",
+    "topIncome": "Pinanggalingan ng kita",
+    "yourSpaces": "Mga space mo",
+    "uncategorised": "Walang kategorya",
+    "monthlyBudget": "Buwanang budget",
+    "seeAll": "Tingnan lahat",
+    "nothingYet": "Wala pang naitala ngayong buwan.",
+    "other": "Iba pa",
+    "view": "Ipakita",
+    "netAll": "Natira ngayong buwan, lahat ng space",
+    "savings": "{{name}} ngayong buwan",
+    "left": "{{amount}} pa ang natitira"
   },
   "spaces": {
     "switch": "Palitan ang space, kasalukuyan: {{name}}",
@@ -75,6 +88,8 @@
     "bills": "Mga bayarin (malapit na)"
   },
   "transactions": {
+    "emptyMonth": "Walang naitala sa buwang ito.",
+    "month": "Buwan",
     "add": "Magdagdag",
     "edit": "I-edit",
     "empty": "Wala pang transaksyon. Idagdag ang una mo!",
@@ -89,7 +104,13 @@
     "receiptAttached": "May resibo na",
     "invalidAmount": "Maglagay ng halaga gaya ng 150 o 1,234.50",
     "invalidDate": "Gamitin ang YYYY-MM-DD",
-    "deleteConfirm": "Burahin ang transaksyong ito?"
+    "deleteConfirm": "Burahin ang transaksyong ito?",
+    "byCategory": "Ayon sa kategorya",
+    "total": "Kabuuan",
+    "spent": "Nagastos",
+    "earned": "Kinita",
+    "count_one": "{{count}} transaksyon",
+    "count_other": "{{count}} na transaksyon"
   },
   "budgets": {
     "safeToSpend": "Puwedeng gastusin",
@@ -98,9 +119,14 @@
     "spentOf": "{{spent}} sa {{limit}}",
     "setLimit": "Magtakda ng buwanang limit",
     "limit": "Buwanang limit (₱)",
-    "empty": "Wala pang budget. Magtakda ng limit para sa isang kategorya."
+    "empty": "Wala pang budget. Magtakda ng limit para sa isang kategorya.",
+    "onTrack": "Pasok pa sa budget",
+    "nearLimit": "Malapit nang lumampas",
+    "over": "Lampas na sa limit",
+    "dailySpend": "Gastos kada araw ngayong buwan"
   },
   "ipon": {
+    "totalSaved": "Naipon na sa mga challenge at goal",
     "challenges": "Mga challenge",
     "goals": "Mga goal",
     "emptyChallenges": "Wala pang challenge. Magsimula para masanay mag-ipon.",

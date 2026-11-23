@@ -4,7 +4,7 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-import { Button, Choice, TextField } from '@/components/ui';
+import { Button, Choice, Segmented, TextField, TilePicker } from '@/components/ui';
 import { isIsoDate } from '@/lib/dates';
 import { parsePesos } from '@/lib/money';
 import type { TxnType } from '@/types/models';
@@ -24,7 +24,7 @@ export type TxnFormValues = z.infer<ReturnType<typeof makeSchema>>;
 
 type Props = {
   initial: TxnFormValues;
-  categories: { id: string; name: string; type: TxnType }[];
+  categories: { id: string; name: string; type: TxnType; icon?: string | null }[];
   sources: { id: string; name: string }[];
   onSubmit: (values: TxnFormValues) => void | Promise<void>;
   submitting?: boolean;
@@ -45,7 +45,7 @@ export function TransactionForm({ initial, categories, sources, onSubmit, submit
         control={control}
         name="type"
         render={({ field }) => (
-          <Choice
+          <Segmented
             label={t('transactions.add')}
             options={[
               { value: 'expense' as const, label: t('transactions.expense') },
@@ -78,9 +78,9 @@ export function TransactionForm({ initial, categories, sources, onSubmit, submit
         control={control}
         name="categoryId"
         render={({ field }) => (
-          <Choice
+          <TilePicker
             label={t('transactions.category')}
-            options={categories.filter((c) => c.type === type).map((c) => ({ value: c.id, label: c.name }))}
+            options={categories.filter((c) => c.type === type).map((c) => ({ value: c.id, label: c.name, icon: c.icon }))}
             value={field.value}
             onChange={field.onChange}
           />

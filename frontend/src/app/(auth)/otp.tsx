@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, ErrorNote, Screen, TextField, Title } from '@/components/ui';
+import { AuthHeader, Button, ErrorNote, Screen, TextField } from '@/components/ui';
 import { toE164PH } from '@/features/auth/phone';
 import { supabase } from '@/lib/supabase';
 
@@ -33,8 +33,7 @@ export default function Otp() {
   };
 
   return (
-    <Screen>
-      <Title>{t('auth.withPhone')}</Title>
+    <Screen header={<AuthHeader subtitle={t('auth.withPhone')} />}>
       {error ? <ErrorNote message={error} /> : null}
       {phone === null ? (
         <>

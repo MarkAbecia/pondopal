@@ -3,6 +3,7 @@ import type { Centavos } from './money';
 export type BudgetLine = {
   categoryId: string;
   name: string;
+  icon?: string | null;
   limit: Centavos;
   spent: Centavos;
 };

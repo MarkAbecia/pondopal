@@ -7,7 +7,8 @@
     "loading": "Loading…",
     "error": "Something went wrong",
     "offlineQueued": "Saved offline. It will sync when you're back online.",
-    "loadMore": "Load more"
+    "loadMore": "Load more",
+    "back": "Back"
   },
   "auth": {
     "signIn": "Sign in",
@@ -43,7 +44,19 @@
     "allSpaces": "All spaces",
     "income": "Income",
     "expense": "Expenses",
-    "net": "Net"
+    "net": "Net",
+    "topExpense": "Top spending",
+    "topIncome": "Top income",
+    "yourSpaces": "Your spaces",
+    "uncategorised": "Uncategorised",
+    "monthlyBudget": "Monthly budget",
+    "seeAll": "See all",
+    "nothingYet": "Nothing logged this month yet.",
+    "other": "Other",
+    "view": "Show",
+    "netAll": "Net this month, all spaces",
+    "savings": "{{name}} this month",
+    "left": "{{amount}} left"
   },
   "spaces": {
     "switch": "Switch space, current: {{name}}",
@@ -75,6 +88,8 @@
     "bills": "Bills (coming soon)"
   },
   "transactions": {
+    "emptyMonth": "Nothing logged in this month.",
+    "month": "Month",
     "add": "Add transaction",
     "edit": "Edit transaction",
     "empty": "No transactions yet. Add your first one!",
@@ -89,7 +104,13 @@
     "receiptAttached": "Receipt attached",
     "invalidAmount": "Enter an amount like 150 or 1,234.50",
     "invalidDate": "Use YYYY-MM-DD",
-    "deleteConfirm": "Delete this transaction?"
+    "deleteConfirm": "Delete this transaction?",
+    "byCategory": "By category",
+    "total": "Total",
+    "spent": "Spent",
+    "earned": "Earned",
+    "count_one": "{{count}} transaction",
+    "count_other": "{{count}} transactions"
   },
   "budgets": {
     "safeToSpend": "Safe to spend",
@@ -98,9 +119,14 @@
     "spentOf": "{{spent}} of {{limit}}",
     "setLimit": "Set monthly limit",
     "limit": "Monthly limit (₱)",
-    "empty": "No budgets yet. Set a limit for a category."
+    "empty": "No budgets yet. Set a limit for a category.",
+    "onTrack": "Spending is on track",
+    "nearLimit": "Almost at the limit",
+    "over": "Over the limit",
+    "dailySpend": "Spending per day this month"
   },
   "ipon": {
+    "totalSaved": "Saved so far in challenges and goals",
     "challenges": "Challenges",
     "goals": "Goals",
     "emptyChallenges": "No challenges yet. Start one to build an ipon habit.",

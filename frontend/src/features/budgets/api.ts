@@ -14,7 +14,7 @@ export function useBudgetSummary(spaceId: string | undefined, month: string) {
       const [budgets, expenses] = await Promise.all([
         supabase
           .from('budgets')
-          .select('id, category_id, limit_centavos, category:categories(name)')
+          .select('id, category_id, limit_centavos, category:categories(name, icon)')
           .eq('space_id', spaceId!)
           .eq('month', month),
         // shortcut: sums in the app; move to GET /spaces/{id}/reports/monthly (cached) for big spaces
@@ -35,6 +35,7 @@ export function useBudgetSummary(spaceId: string | undefined, month: string) {
         budgetId: b.id,
         categoryId: b.category_id,
         name: b.category?.name ?? '—',
+        icon: b.category?.icon ?? null,
         limit: b.limit_centavos,
         spent: spentBy.get(b.category_id) ?? 0,
       }));

@@ -1,19 +1,29 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Text } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 
-import { Button, Card, Choice, ErrorNote, Muted, Screen, Title } from '@/components/ui';
+import { Button, Card, Choice, ErrorNote, GradientHeader, HeaderNote, Muted, Screen, Title } from '@/components/ui';
 import { deleteMyAccount, exportMyData } from '@/features/account/api';
 import { unregisterPush } from '@/features/notifications/push';
 import { deviceLanguage } from '@/i18n';
 import { supabase } from '@/lib/supabase';
+import { usePalette } from '@/lib/theme';
 import { useSession } from '@/stores/session';
 import { useSettings } from '@/stores/settings';
 
 type Pick = 'system' | 'en' | 'fil';
 
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0]!.toUpperCase())
+    .join('');
+
 export default function Profile() {
   const { t } = useTranslation();
+  const c = usePalette();
   const user = useSession((s) => s.session?.user);
   const name = (user?.user_metadata as { full_name?: string } | undefined)?.full_name;
   const language = useSettings((s) => s.language);
@@ -48,21 +58,59 @@ export default function Profile() {
       { text: t('profile.deleteConfirm'), style: 'destructive', onPress: () => void run('delete', deleteMyAccount) },
     ]);
 
+  const header = (
+    <GradientHeader>
+      <View className="flex-row items-center gap-4">
+        <View accessible={false} style={{ backgroundColor: c.glass }} className="h-16 w-16 items-center justify-center rounded-full">
+          <Text className="text-2xl font-bold text-white">{name ? initials(name) : '?'}</Text>
+        </View>
+        <View className="flex-1 gap-0.5">
+          <Text accessibilityRole="header" numberOfLines={1} className="text-2xl font-bold text-white">
+            {name ?? '—'}
+          </Text>
+          <HeaderNote>{user?.email ?? user?.phone ?? ''}</HeaderNote>
+        </View>
+      </View>
+    </GradientHeader>
+  );
+
   return (
-    <Screen>
+    <Screen header={header}>
       <Card>
-        <Text className="text-base font-semibold text-fg">{name ?? '—'}</Text>
-        <Muted>{user?.email ?? user?.phone ?? ''}</Muted>
+        <Choice<Pick>
+          label={t('profile.language')}
+          options={(['system', 'en', 'fil'] as const).map((value) => ({ value, label: t(`profile.languages.${value}`) }))}
+          value={language}
+          onChange={pickLanguage}
+        />
       </Card>
 
-      <Choice<Pick>
-        label={t('profile.language')}
-        options={(['system', 'en', 'fil'] as const).map((value) => ({ value, label: t(`profile.languages.${value}`) }))}
-        value={language}
-        onChange={pickLanguage}
-      />
+      <Title>{t('profile.privacy')}</Title>
+      <Card>
+        <View className="gap-4">
+          <Muted>{t('profile.privacyHint')}</Muted>
+          {error ? <ErrorNote message={error} /> : null}
+          <Button
+            icon="download-outline"
+            label={t('profile.export')}
+            variant="secondary"
+            loading={busy === 'export'}
+            disabled={busy !== null}
+            onPress={() => void run('export', exportMyData)}
+          />
+          <Button
+            icon="trash-outline"
+            label={t('profile.delete')}
+            variant="danger"
+            loading={busy === 'delete'}
+            disabled={busy !== null}
+            onPress={confirmDelete}
+          />
+        </View>
+      </Card>
 
       <Button
+        icon="log-out-outline"
         label={t('auth.signOut')}
         variant="secondary"
         onPress={async () => {
@@ -70,18 +118,6 @@ export default function Profile() {
           await supabase.auth.signOut();
         }}
       />
-
-      <Title>{t('profile.privacy')}</Title>
-      <Muted>{t('profile.privacyHint')}</Muted>
-      {error ? <ErrorNote message={error} /> : null}
-      <Button
-        label={t('profile.export')}
-        variant="secondary"
-        loading={busy === 'export'}
-        disabled={busy !== null}
-        onPress={() => void run('export', exportMyData)}
-      />
-      <Button label={t('profile.delete')} variant="danger" loading={busy === 'delete'} disabled={busy !== null} onPress={confirmDelete} />
     </Screen>
   );
 }

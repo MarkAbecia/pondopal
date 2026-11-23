@@ -70,7 +70,7 @@ export function SplitEditor({ txnId, spaceId, amount }: Props) {
               accessibilityLabel={m.name ?? '—'}
               accessibilityState={{ checked: on }}
               onPress={() => toggle(m.userId)}
-              className="min-h-11 flex-row items-center gap-3">
+              className="active:opacity-70 min-h-11 flex-row items-center gap-3">
               <View className={`h-6 w-6 items-center justify-center rounded border ${on ? 'border-brand bg-brand' : 'border-line'}`}>
                 {on ? <Text className="font-bold text-white">✓</Text> : null}
               </View>

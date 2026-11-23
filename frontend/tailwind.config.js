@@ -16,7 +16,7 @@ module.exports = {
         muted: token('muted'),
         line: { DEFAULT: token('line'), soft: token('line-soft') },
         brand: { DEFAULT: token('brand'), light: token('brand-soft'), dark: token('brand-ink') },
-        income: token('income'),
+        income: { DEFAULT: token('income'), soft: token('income-soft') },
         expense: token('expense'),
         'danger-soft': token('danger-soft'),
       },

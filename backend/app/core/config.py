@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     sentry_dsn: str = ""
     expo_access_token: str = ""  # optional; required once "enhanced push security" is on
     log_level: str = "INFO"
+    # Browser origins allowed to call the API (Expo web). Phones send no Origin and need none.
+    cors_origins: list[str] = ["http://localhost:8081"]
 
 
 @lru_cache

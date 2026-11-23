@@ -1,3 +1,7 @@
+/* Hallmark · v2.0.0 · redesign frontend/ (React Native + NativeWind) · theme: the user's reference image (by request) · genre: modern-minimal · scope: app · signature: peso figures with small centavos on the violet stage, and the category donut */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: P, the stage could read as any fintech app; anchored it on PH money rituals (spaces, ipon, kinsenas copy) and per-category colour */
+/* Hallmark · user override 2a · violet-to-indigo gradient headers kept at the user's explicit choice on 2026-11-23; recorded, not waived */
+/* Hallmark · waive 26b · every control Pressable (all but the sheet backdrop) carries a NativeWind active: class (active:opacity-80, active:bg-danger-soft) · React Native press states compile to Pressable state, not CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,17 +9,44 @@
 /* Theme colors are CSS variables set at the app root from src/lib/theme.ts (light and dark).
    These are the light values, as a fallback for anything rendered outside that root. */
 :root {
-  --canvas: 249 250 251;
+  --canvas: 244 243 250;
   --card: 255 255 255;
-  --fg: 17 24 39;
-  --fg-2: 55 65 81;
-  --muted: 75 85 99;
-  --line: 209 213 219;
-  --line-soft: 229 231 235;
-  --brand: 11 128 67;
-  --brand-soft: 230 246 238;
-  --brand-ink: 6 95 50;
-  --income: 11 128 67;
-  --expense: 197 34 31;
-  --danger-soft: 254 242 242;
+  --fg: 28 24 56;
+  --fg-2: 59 54 96;
+  --muted: 95 90 128;
+  --line: 220 217 236;
+  --line-soft: 236 234 245;
+  --brand: 79 70 229;
+  --brand-soft: 238 237 253;
+  --brand-ink: 55 48 163;
+  --income: 11 122 92;
+  --income-soft: 226 245 238;
+  --expense: 200 38 75;
+  --danger-soft: 252 235 239;
+}
+
+/* Web only (native platforms draw their own focus): a keyboard focus ring on every control,
+   appearing instantly, in the brand color at 3:1 or better on canvas and card. */
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[role="radio"]:focus-visible,
+[role="checkbox"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(var(--brand));
+  outline-offset: 2px;
+}
+
+[aria-disabled="true"],
+:disabled {
+  cursor: not-allowed;
+}
+
+/* Browser surfaces carry the palette too (web build). */
+::selection {
+  background: rgb(var(--brand) / 0.25);
+}
+html {
+  caret-color: rgb(var(--brand));
+  scrollbar-color: rgb(var(--line)) transparent;
 }

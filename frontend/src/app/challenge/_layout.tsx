@@ -1,5 +1,7 @@
 import { Stack } from 'expo-router';
 
+import { StackHeader } from '@/components/ui';
+
 export default function ChallengeLayout() {
-  return <Stack screenOptions={{ headerBackButtonDisplayMode: 'minimal' }} />;
+  return <Stack screenOptions={{ header: (props) => <StackHeader {...props} /> }} />;
 }

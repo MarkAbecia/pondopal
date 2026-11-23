@@ -185,3 +185,20 @@ export function useContribute(goalId: string, spaceId: string | undefined) {
     onSettled: () => qc.invalidateQueries({ queryKey: ['goal', goalId] }),
   });
 }
+
+/** Everything saved in a space so far: challenge entries plus goal contributions (RLS-scoped). */
+export function useIponTotal(spaceId: string | undefined) {
+  return useQuery({
+    queryKey: ['ipon', spaceId, 'total'],
+    enabled: !!spaceId,
+    queryFn: async () => {
+      // shortcut: summed in the app; move to a SQL sum when entries grow into the thousands
+      const [entries, contributions] = await Promise.all([
+        supabase.from('challenge_entries').select('amount_centavos').eq('space_id', spaceId!),
+        supabase.from('goal_contributions').select('amount_centavos').eq('space_id', spaceId!),
+      ]);
+      const sum = (rows: { amount_centavos: number }[]) => rows.reduce((s, r) => s + r.amount_centavos, 0);
+      return sum(unwrap(entries)) + sum(unwrap(contributions));
+    },
+  });
+}

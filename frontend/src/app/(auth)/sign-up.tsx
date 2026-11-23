@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Text } from 'react-native';
 import { z } from 'zod';
 
-import { Button, ErrorNote, Muted, Screen, TextField, Title } from '@/components/ui';
+import { AuthHeader, Button, ErrorNote, Muted, Screen, TextField } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 
 export default function SignUp() {
@@ -50,8 +50,7 @@ export default function SignUp() {
   ];
 
   return (
-    <Screen>
-      <Title>{t('auth.signUp')}</Title>
+    <Screen header={<AuthHeader subtitle={t('auth.signUp')} />}>
       {error ? <ErrorNote message={error} /> : null}
       {checkEmail ? <Muted>{t('auth.checkEmail')}</Muted> : null}
       {fields.map((f) => (

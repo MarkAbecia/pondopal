@@ -36,7 +36,7 @@ function Cell({
       accessibilityState={{ checked: done, disabled }}
       disabled={disabled}
       onPress={() => onPress(index, done)}
-      className={`m-0.5 h-11 w-11 items-center justify-center rounded-lg border ${done ? 'border-brand bg-brand' : 'border-line bg-card'}`}>
+      className={`active:opacity-70 m-0.5 h-11 w-11 items-center justify-center rounded-lg border ${done ? 'border-brand bg-brand' : 'border-line bg-card'}`}>
       {/* fixed 44pt cells: cap scaling so big system fonts don't overflow; the full value is in the label */}
       <Text maxFontSizeMultiplier={1.3} className={`text-xs font-semibold ${done ? 'text-white' : 'text-fg-2'}`}>
         {index}

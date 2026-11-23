@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Platform, Text } from 'react-native';
 import { z } from 'zod';
 
-import { Button, ErrorNote, Screen, TextField, Title } from '@/components/ui';
+import { AuthHeader, Button, ErrorNote, Screen, TextField } from '@/components/ui';
 import { signInWithProvider } from '@/features/auth/oauth';
 import { supabase } from '@/lib/supabase';
 
@@ -33,8 +33,7 @@ export default function SignIn() {
     signInWithProvider(provider).catch((e: Error) => setError(e.message));
 
   return (
-    <Screen>
-      <Title>PondoPal</Title>
+    <Screen header={<AuthHeader subtitle={t('auth.signIn')} />}>
       {error ? <ErrorNote message={error} /> : null}
       <Controller
         control={control}
