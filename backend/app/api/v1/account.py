@@ -49,7 +49,8 @@ async def delete_my_account(request: Request, user: CurrentUser, db: AdminDb) ->
                     bucket,
                     folder,
                 )
-            except httpx.HTTPError as e:
+            # any failure here: the account is already committed as deleted, so never 500
+            except Exception as e:
                 # shortcut: orphaned files are unreachable (their space/user is gone) but stay
                 # in the bucket; add a sweeper job if this ever logs in production
                 log.error(

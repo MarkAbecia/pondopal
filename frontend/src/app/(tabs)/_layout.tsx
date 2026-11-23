@@ -1,6 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { type IconName, lift } from '@/components/ui';
@@ -39,7 +40,6 @@ export default function TabsLayout() {
           paddingBottom: insets.bottom + 8,
           ...lift(c, 2),
         },
-        tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
       }}>
       {TABS.map((tab) => (
         <Tabs.Screen
@@ -47,6 +47,12 @@ export default function TabsLayout() {
           name={tab.name}
           options={{
             title: t(`tabs.${tab.key}`),
+            // shrink rather than truncate ("Transactio…") on narrow phones or large system font
+            tabBarLabel: ({ color, children }) => (
+              <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.7} style={{ color, fontSize: 11, fontWeight: '600' }}>
+                {children}
+              </Text>
+            ),
             tabBarIcon: ({ color, focused }) => (
               <Ionicons name={focused ? tab.active : tab.icon} color={color as string} size={24} />
             ),

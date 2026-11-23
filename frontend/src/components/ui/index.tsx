@@ -10,6 +10,7 @@ import {
   Text,
   TextInput,
   type TextInputProps,
+  useWindowDimensions,
   View,
   type ViewStyle,
 } from 'react-native';
@@ -26,7 +27,8 @@ export type IconName = ComponentProps<typeof Ionicons>['name'];
 const face = (name: string) => Platform.select({ web: `${name}, system-ui, sans-serif`, default: name });
 export const DISPLAY = { fontFamily: face('Figtree_800ExtraBold'), fontVariant: ['tabular-nums'] } as const;
 export const FIGURE = { fontFamily: face('Figtree_700Bold'), fontVariant: ['tabular-nums'] } as const;
-const NUMS = { fontVariant: ['tabular-nums'] } as const;
+// Android mis-measures bold system text with tabular-nums and clips the last digit (₱0.0)
+const NUMS = Platform.OS === 'android' ? {} : ({ fontVariant: ['tabular-nums'] } as const);
 
 /** Soft violet lift for cards and floating controls (a black shadow in dark mode, where it barely reads). */
 export const lift = (c: Palette, strength = 1): ViewStyle => ({
@@ -81,10 +83,12 @@ export function StatusScrim() {
   const c = usePalette();
   const insets = useSafeAreaInsets();
   const id = `scrim${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
+  const { width } = useWindowDimensions();
   if (!insets.top) return null;
   return (
     <View pointerEvents="none" style={{ height: insets.top }} className="absolute left-0 right-0 top-0">
-      <Svg width="100%" height="100%">
+      {/* pixel sizes: Android's react-native-svg resolves "100%" against a stale size */}
+      <Svg width={width} height={insets.top}>
         <Defs>
           <LinearGradient id={id} x1="0" y1="0" x2="2" y2="0">
             <Stop offset="0" stopColor={c.gradFrom} />
@@ -103,11 +107,14 @@ export function GradientHeader({ children, flat }: { children: ReactNode; flat?:
   const insets = useSafeAreaInsets();
   // one gradient id per header: on web, ids are document-wide and a hidden tab's copy would win
   const id = `stage${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
+  // pixel sizes: Android's react-native-svg resolves "100%" against a stale size
+  const [size, setSize] = useState({ width: 0, height: 0 });
   return (
     <View
-      style={{ paddingTop: insets.top + 8 }}
+      onLayout={(e) => setSize(e.nativeEvent.layout)}
+      style={{ paddingTop: insets.top + 8, backgroundColor: c.gradTo }}
       className={`overflow-hidden px-5 ${flat ? 'pb-4' : 'pb-7'}`}>
-      <Svg style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} width="100%" height="100%">
+      <Svg style={{ position: 'absolute', top: 0, left: 0 }} width={size.width} height={size.height}>
         <Defs>
           <LinearGradient id={id} x1="0" y1="0" x2="1" y2="1">
             <Stop offset="0" stopColor={c.gradFrom} />

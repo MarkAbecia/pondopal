@@ -1,12 +1,14 @@
 import type { ExpoConfig } from 'expo/config';
 
 // Set by EAS per build profile (eas.json `environment`); see README "Builds".
-const projectId = process.env.EAS_PROJECT_ID;
-const bundleId = process.env.APP_BUNDLE_ID ?? 'com.pondopal.app';
+// not a secret: the EAS CLI needs it locally to find the project
+const projectId = process.env.EAS_PROJECT_ID ?? '2e7f0585-9694-4ac2-adb7-b9f47bca5327';
+const bundleId = process.env.APP_BUNDLE_ID ?? 'ph.markabecia.pondopal';
 
 const config: ExpoConfig = {
   name: 'PondoPal',
   slug: 'pondopal',
+  owner: 'nexora-engineering',
   version: '0.1.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
