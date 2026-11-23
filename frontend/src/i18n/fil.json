@@ -84,6 +84,10 @@
     "shareInvite": "Sumali sa PondoPal space kong \"{{name}}\" gamit ang code na {{code}}",
     "remove": "Alisin",
     "leave": "Umalis sa space",
+    "delete": "Burahin ang space",
+    "deleteTitle": "Burahin ang {{name}}?",
+    "deleteBody": "Mabubura ang space para sa lahat ng miyembro, kasama ang lahat ng transaksyon, budget, goal at hatian nito. Hindi na ito maibabalik.",
+    "deleteConfirm": "Burahin nang tuluyan",
     "budgets": "Budget",
     "bills": "Mga bayarin (malapit na)"
   },

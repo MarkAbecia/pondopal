@@ -130,6 +130,23 @@ export function useRemoveMember(spaceId: string) {
   });
 }
 
+/** Owner only, shared spaces only (RLS). Everything in the space goes with it (on delete cascade). */
+export function useDeleteSpace() {
+  const qc = useQueryClient();
+  const setActive = useSpaceStore((s) => s.setActiveSpace);
+  return useMutation({
+    mutationFn: async (spaceId: string) => {
+      // RLS filters a forbidden delete to 0 rows instead of erroring, so check what came back
+      const rows = unwrap(await supabase.from('spaces').delete().eq('id', spaceId).select('id'));
+      if (!rows.length) throw new Error('Only the owner can delete this space');
+    },
+    onSuccess: () => {
+      setActive(null);
+      return qc.invalidateQueries();
+    },
+  });
+}
+
 export function useLeaveSpace() {
   const qc = useQueryClient();
   const setActive = useSpaceStore((s) => s.setActiveSpace);

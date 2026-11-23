@@ -1,10 +1,10 @@
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 
 import { BigMoney, Button, Card, CategoryTile, ErrorNote, type IconName, ListRow, Muted, Screen } from '@/components/ui';
 import { useMonthSummary } from '@/features/home/api';
-import { useLeaveSpace, useMySpaces } from '@/features/spaces/api';
+import { useDeleteSpace, useLeaveSpace, useMySpaces } from '@/features/spaces/api';
 import { manilaMonth } from '@/lib/dates';
 import { usePalette } from '@/lib/theme';
 import { useSpaceStore } from '@/stores/space';
@@ -17,9 +17,11 @@ export default function SpaceDashboard() {
   const totals = useMonthSummary(manilaMonth()).data?.bySpace[id] ?? { income: 0, expense: 0 };
   const setActive = useSpaceStore((s) => s.setActiveSpace);
   const leave = useLeaveSpace();
+  const remove = useDeleteSpace();
 
   if (!space) return <Screen><Muted>{t('common.loading')}</Muted></Screen>;
   const canLeave = space.type !== 'personal' && space.role !== 'owner';
+  const canDelete = space.type !== 'personal' && space.role === 'owner';
   const shared = space.type !== 'personal';
 
   const links: { icon: IconName; label: string; go: () => void }[] = [
@@ -65,6 +67,25 @@ export default function SpaceDashboard() {
         ))}
       </Card>
       {leave.error ? <ErrorNote message={leave.error.message} /> : null}
+      {remove.error ? <ErrorNote message={remove.error.message} /> : null}
+      {canDelete ? (
+        <Button
+          icon="trash-outline"
+          label={t('spaces.delete')}
+          variant="danger"
+          loading={remove.isPending}
+          onPress={() =>
+            Alert.alert(t('spaces.deleteTitle', { name: space.name }), t('spaces.deleteBody'), [
+              { text: t('common.cancel'), style: 'cancel' },
+              {
+                text: t('spaces.deleteConfirm'),
+                style: 'destructive',
+                onPress: () => remove.mutate(space.id, { onSuccess: () => router.replace('/spaces') }),
+              },
+            ])
+          }
+        />
+      ) : null}
       {canLeave ? (
         <Button
           icon="exit-outline"

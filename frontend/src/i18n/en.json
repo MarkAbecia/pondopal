@@ -84,6 +84,10 @@
     "shareInvite": "Join my PondoPal space \"{{name}}\" with code {{code}}",
     "remove": "Remove",
     "leave": "Leave space",
+    "delete": "Delete space",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteBody": "This removes the space for every member, with all its transactions, budgets, goals and splits. It can't be undone.",
+    "deleteConfirm": "Delete forever",
     "budgets": "Budgets",
     "bills": "Bills (coming soon)"
   },
